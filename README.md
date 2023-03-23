@@ -33,12 +33,12 @@ pubcrypt/cryptosystem/rsa.py
 | primitive_exp          | m, exp, n       |   plaintext or ciphertext  |
 | prime_recovery         | n, e, d         |    p, q |
 
-nBits = the size in bits of your key [2048, 8192]
-n = public modulus
-e = public exponent
-d = private exponent
-exp = public or private exponent
-p, q = first and second prime factor 
+nBits = the size in bits of your key [2048, 8192] <br>
+n = public modulus <br>
+e = public exponent <br>
+d = private exponent <br>
+exp = public or private exponent <br>
+p, q = first and second prime factor <br>
 
 ------------------------------------------
 
@@ -47,6 +47,7 @@ pubcrypt/number/primality.py:
 | :--------------:       |:---------------:| :-----------------:|
 | get_prime_factors      | pBits, e        |  a prime p         |
 | miller_rabin           | p, r            | PRIME or NOT_PRIME |
+
 r = number of round for Miller Rabin primality test. Set to 5
 
 -----------------------------------
