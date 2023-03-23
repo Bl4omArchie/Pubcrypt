@@ -32,6 +32,7 @@ pubcrypt/cryptosystem/rsa.py
 | generate               | nBits, e=65537  |  public and private keypair: n, e, d   |
 | primitive_exp          | m, exp, n       |   plaintext or ciphertext  |
 | prime_recovery         | n, e, d         |    p, q |
+
 nBits = the size in bits of your key [2048, 8192]
 n = public modulus
 e = public exponent
