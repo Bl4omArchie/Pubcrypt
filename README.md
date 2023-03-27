@@ -25,7 +25,19 @@ Install the last stable version: https://github.com/Bl4omArchie/pubcrypt/release
 Once you installed the package, you can call function from the test.py file.
 With the app.py file, call directly your function from the command line:
 ``` 
-python3 app.py --g -
+usage: app.py [-h] [-g G] [-enc ENC] [-dec DEC] [-r R] [-e E] [-n N] [-d D]
+
+Call function from pubcrypt module
+
+optional arguments:
+  -h, --help  show this help message and exit
+  -g G        Generate an RSA keypair. Indicate the bits size as an argument
+  -enc ENC    encryption your data
+  -dec DEC    decrypt your data
+  -r R        recover your primes factor. Indicate the public modulus as an argument
+  -e E        Public exponent. By default: e=65537
+  -n N        Public modulus
+  -d D        Private exponent
 
 ``` 
 
@@ -112,6 +124,7 @@ A more precise description is available below each function
 | Version          | Description     |
 | :--------------: |:---------------:|
 | v1.0             | first stable version of pubcrypt. Can generate, encrypt, decrypt and recover prime factors        |
+| v1.1             | command line version added        |
 
 
 ## Author
