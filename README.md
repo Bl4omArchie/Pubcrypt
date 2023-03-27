@@ -10,19 +10,24 @@ I've started this project in the purpose of training myself to implemente crypto
   - [Table of contents](#table-of-contents)
   - [Installation](#installation)
   - [Documentation](#documentation)
-  - [Task](#task)
-    - [🚧 In progress](#-in-progress)
-    - [✅ Done](#-done)
+  - [Plan](#plan)
+    - [✅ Main branch](#-main-branch)
+    - [🚧 pubcrypt-dev](#-pubcrypt-dev)
   - [Version](#version)
   - [Author](#author)
   - [References](#references)
 
 ##  Installation
 
-Install the very last version: ```git clone https://github.com/Bl4omArchie/pubcrypt```
+Install the very last version: ```git clone https://github.com/Bl4omArchie/pubcrypt``` <br>
 Install the last stable version: https://github.com/Bl4omArchie/pubcrypt/releases/tag/v1.0
 
-Once you installed the package, you can call function from the test.py file
+Once you installed the package, you can call function from the test.py file.
+With the app.py file, call directly your function from the command line:
+``` 
+python3 app.py --g -
+
+``` 
 
 ## Documentation
 
@@ -33,12 +38,14 @@ pubcrypt/cryptosystem/rsa.py
 | primitive_exp          | m, exp, n       |   plaintext or ciphertext  |
 | prime_recovery         | n, e, d         |    p, q |
 
+```
 nBits = the size in bits of your key [2048, 8192] <br>
 n = public modulus <br>
 e = public exponent <br>
 d = private exponent <br>
 exp = public or private exponent <br>
 p, q = first and second prime factor <br>
+``` 
 
 ------------------------------------------
 
@@ -48,7 +55,9 @@ pubcrypt/number/primality.py:
 | get_prime_factors      | pBits, e        |  a prime p         |
 | miller_rabin           | p, r            | PRIME or NOT_PRIME |
 
+``` 
 r = number of round for Miller Rabin primality test. Set to 5
+``` 
 
 -----------------------------------
 
@@ -84,17 +93,18 @@ pubcrypt/number/random.py
 A more precise description is available below each function
 
 
-## Task
+## Plan
 
-### 🚧 In progress
-- benchmark + pdf with graph an tutorial
-- app.py: where you can use the library with command from the terminal
-- PKCS: encryption, decryption and signature methods
-
-### ✅ Done
-- generate(), primitive_exp(), prime_factor_recovery()
+### ✅ Main branch
+- generate(), primitive_exp(), prime_recovery()
 - Miller Rabin primality test
 - README + gitignore
+- app.py: where you can use the library with command from the terminal
+
+### 🚧 pubcrypt-dev
+- benchmark + pdf with graph an tutorial
+- improve app.py with a file argument where you can indicate your value directly from a file.
+- PKCS: encryption, decryption and signature methods
 
 
 ## Version
