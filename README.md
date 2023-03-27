@@ -99,10 +99,11 @@ A more precise description is available below each function
 - generate(), primitive_exp(), prime_recovery()
 - Miller Rabin primality test
 - README + gitignore
+- app.py: where you can use the library with command from the terminal
 
 ### 🚧 pubcrypt-dev
 - benchmark + pdf with graph an tutorial
-- app.py: where you can use the library with command from the terminal
+- improve app.py with a file argument where you can indicate your value directly from a file.
 - PKCS: encryption, decryption and signature methods
 
 

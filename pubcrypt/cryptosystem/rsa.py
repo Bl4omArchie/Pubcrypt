@@ -39,10 +39,10 @@ def prime_recovery(n, e, d):
     r = a - m*n
     b = (n-r) // (m+1) +1
 
-    if pow_mod(b, 2) <= 4*n:
+    if pow(b, 2) <= 4*n:
         raise ValueError("Error")
 
-    y = isqrt(pow_mod(b, 2)-4*n)
+    y = isqrt(pow(b, 2)-4*n)
     return (b+y) // 2, (b-y) // 2
 
 
