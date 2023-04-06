@@ -15,7 +15,7 @@ I've started this project in the purpose of training myself to implemente crypto
     - [🚧 pubcrypt-dev](#-pubcrypt-dev)
   - [Version](#version)
   - [Author](#author)
-  - [References](#references)
+  - [Sources](#sources)
 
 ##  Installation
 
@@ -120,7 +120,7 @@ You can contact me and see my work here:
 - Discord server: https://discord.com/invite/D2wGP62
 - Twitter: https://twitter.com/Bl4om_Archie
 
-## References
+## Sources
  - [NIST FIPS 186-4: Digital Signature Standard (DSS)](https://nvlpubs.nist.gov/nistpubs/fips/nist.fips.186-4.pdf)
  - [NIST SP 800-56Br2: Recommendation for Pair-Wise Key Establishment Using Integer Factorization Cryptography](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Br2.pdf)
  - [PKCS #1 Version 2.2: RSA Cryptography Specifications draft-moriarty-pkcs1-01](https://datatracker.ietf.org/doc/pdf/draft-moriarty-pkcs1-01.pdf)
