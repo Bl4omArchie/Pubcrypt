@@ -2,6 +2,10 @@ from pubcrypt.cryptosystem.rsa import *
 from pubcrypt.number.primality import *
 from pubcrypt.number.util import *
 
+from benchmark.gcd import *
+from benchmark.pow import *
+from benchmark.generate import *
+
 
 """
 This test verify that everything work correcly. You can call every functions you want below.
@@ -19,5 +23,7 @@ def launch_test():
         ValueError("Test failed")
 
 
+
 if __name__ == "__main__":
-    launch_test()
+    #launch_test()
+    launch_pow_bench(10)

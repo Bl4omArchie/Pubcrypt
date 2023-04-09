@@ -10,6 +10,7 @@ I've started this project in the purpose of training myself to implemente crypto
   - [Table of contents](#table-of-contents)
   - [Installation](#installation)
   - [Documentation](#documentation)
+  - [Benchmark](#benchmark)
   - [Plan](#plan)
     - [✅ Main branch](#-main-branch)
     - [🚧 pubcrypt-dev](#-pubcrypt-dev)
@@ -105,6 +106,20 @@ pubcrypt/number/random.py
 A more precise description is available below each function
 
 
+## Benchmark
+
+My benchmark is comparing different implementation of a same algorithm by mesuring the time it take for N executions.
+At the end it generate graph with matplotlib so you visualize the result. It save the picture in this folder: **benchmark/graph**.
+
+In the same folder, I've made a script for every function I want to evaluate. For example, in the gcd.py script, I putted different implementation of the gcd() function and at the end, I can see which one is the more efficient and put in my library.
+
+You can regenerate every graph with the **-b** option in the command line version or calling the **launching_bench()** function in test.py
+Example: 
+```
+python3 app.py -b 10  
+``` 
+It will repeat every function 10 times.
+
 ## Plan
 
 ### ✅ Main branch
@@ -112,9 +127,10 @@ A more precise description is available below each function
 - Miller Rabin primality test
 - README + gitignore
 - app.py: where you can use the library with command from the terminal
+- benchmark
 
 ### 🚧 pubcrypt-dev
-- benchmark + pdf with graph an tutorial
+- pdf with graph an tutorial
 - improve app.py with a file argument where you can indicate your value directly from a file.
 - PKCS: encryption, decryption and signature methods
 
