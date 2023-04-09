@@ -10,12 +10,13 @@ I've started this project in the purpose of training myself to implemente crypto
   - [Table of contents](#table-of-contents)
   - [Installation](#installation)
   - [Documentation](#documentation)
+  - [Benchmark](#benchmark)
   - [Plan](#plan)
     - [✅ Main branch](#-main-branch)
     - [🚧 pubcrypt-dev](#-pubcrypt-dev)
   - [Version](#version)
   - [Author](#author)
-  - [Sources](#sources)
+  - [References](#references)
 
 ##  Installation
 
@@ -25,7 +26,19 @@ Install the last stable version: https://github.com/Bl4omArchie/pubcrypt/release
 Once you installed the package, you can call function from the test.py file.
 With the app.py file, call directly your function from the command line:
 ``` 
-python3 app.py --g -
+usage: app.py [-h] [-g G] [-enc ENC] [-dec DEC] [-r R] [-e E] [-n N] [-d D]
+
+Call function from pubcrypt module
+
+optional arguments:
+  -h, --help  show this help message and exit
+  -g G        Generate an RSA keypair. Indicate the bits size as an argument
+  -enc ENC    encryption your data
+  -dec DEC    decrypt your data
+  -r R        recover your primes factor. Indicate the public modulus as an argument
+  -e E        Public exponent. By default: e=65537
+  -n N        Public modulus
+  -d D        Private exponent
 
 ``` 
 
@@ -93,6 +106,20 @@ pubcrypt/number/random.py
 A more precise description is available below each function
 
 
+## Benchmark
+
+My benchmark is comparing different implementation of a same algorithm by mesuring the time it take for N executions.
+At the end it generate graph with matplotlib so you visualize the result. It save the picture in this folder: **benchmark/graph**.
+
+In the same folder, I've made a script for every function I want to evaluate. For example, in the gcd.py script, I putted different implementation of the gcd() function and at the end, I can see which one is the more efficient and put in my library.
+
+You can regenerate every graph with the **-b** option in the command line version or calling the **launching_bench()** function in test.py
+Example: 
+```
+python3 app.py -b 10  
+``` 
+It will repeat every function 10 times.
+
 ## Plan
 
 ### ✅ Main branch
@@ -100,9 +127,10 @@ A more precise description is available below each function
 - Miller Rabin primality test
 - README + gitignore
 - app.py: where you can use the library with command from the terminal
+- benchmark
 
 ### 🚧 pubcrypt-dev
-- benchmark + pdf with graph an tutorial
+- pdf with graph an tutorial
 - improve app.py with a file argument where you can indicate your value directly from a file.
 - PKCS: encryption, decryption and signature methods
 
@@ -112,6 +140,7 @@ A more precise description is available below each function
 | Version          | Description     |
 | :--------------: |:---------------:|
 | v1.0             | first stable version of pubcrypt. Can generate, encrypt, decrypt and recover prime factors        |
+| v1.1             | command line version added        |
 
 
 ## Author
@@ -120,7 +149,7 @@ You can contact me and see my work here:
 - Discord server: https://discord.com/invite/D2wGP62
 - Twitter: https://twitter.com/Bl4om_Archie
 
-## Sources
+## References
  - [NIST FIPS 186-4: Digital Signature Standard (DSS)](https://nvlpubs.nist.gov/nistpubs/fips/nist.fips.186-4.pdf)
  - [NIST SP 800-56Br2: Recommendation for Pair-Wise Key Establishment Using Integer Factorization Cryptography](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Br2.pdf)
  - [PKCS #1 Version 2.2: RSA Cryptography Specifications draft-moriarty-pkcs1-01](https://datatracker.ietf.org/doc/pdf/draft-moriarty-pkcs1-01.pdf)

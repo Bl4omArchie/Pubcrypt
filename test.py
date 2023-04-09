@@ -2,7 +2,9 @@ from pubcrypt.cryptosystem.rsa import *
 from pubcrypt.number.primality import *
 from pubcrypt.number.util import *
 
-from benchmark.test import *
+from benchmark.gcd import *
+from benchmark.pow import *
+from benchmark.generate import *
 
 
 """
@@ -21,10 +23,7 @@ def launch_test():
         ValueError("Test failed")
 
 
-def launch_benchmark():
-    bench_generate(1, 2048)
-
 
 if __name__ == "__main__":
-    launch_test()
-    launch_benchmark()
+    #launch_test()
+    launch_pow_bench(10)

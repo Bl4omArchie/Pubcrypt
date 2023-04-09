@@ -1,4 +1,7 @@
 from pubcrypt.cryptosystem.rsa import *
+from benchmark.gcd import *
+from benchmark.generate import *
+from benchmark.pow import *
 import argparse
 
 
@@ -19,11 +22,18 @@ def recover_prime_factor(n, e, d):
     print (f"\np = {p}\nq = {q}")
 
 
+def benchmark(i):
+    launch_gcd_bench(i)
+    launch_generate_bench(i, 2048)
+    launch_pow_bench(i)
+
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Call function from pubcrypt module')
 
     parser.add_argument('-g', type=int, help='Generate an RSA keypair. Indicate the bits size as an argument')
+    parser.add_argument('-b', type=int, help='Launching every benchmark function. Indicate the iteration')
     parser.add_argument('-enc', type=int, help='encryption your data')
     parser.add_argument('-dec', type=int, help='decrypt your data')
     parser.add_argument('-r', type=int, help='recover your primes factor. Indicate the public modulus as an argument')
@@ -64,3 +74,9 @@ if __name__ == "__main__":
             recover_prime_factor(args.r, args.e, args.d)
         except:
             print ("Error: missing arguments '-r', '-e' and '-d'")
+
+    elif args.b:
+        try:
+            benchmark(args.b)
+        except:
+            print ("Error during the benchmark")
