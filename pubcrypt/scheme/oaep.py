@@ -1,4 +1,4 @@
-from pubcrypt.number.random import RBG, bytes_to_int, int_to_bytes, MGF
+from pubcrypt.number.random import RBG, int_to_string, string_to_int, MGF
 from pubcrypt.cryptosystem.rsa import primitive_exp
 from hashlib import sha384
 
@@ -30,6 +30,6 @@ def rsa_oaep_encrypt(m, e, n, label):
     maskedSeed = seed ^ seedMask
     em = "0x00" | maskedSeed | maskedDB
 
-    em = bytes_to_int(em)
+    em = string_to_int(em)
     ciphertext = primitive_exp(m, e, n)
-    return int_to_bytes(ciphertext)
+    return int_to_string(ciphertext)
