@@ -26,13 +26,14 @@ Install the last stable version: https://github.com/Bl4omArchie/pubcrypt/release
 Once you installed the package, you can call function from the test.py file.
 With the app.py file, call directly your function from the command line:
 ``` 
-usage: app.py [-h] [-g G] [-enc ENC] [-dec DEC] [-r R] [-e E] [-n N] [-d D]
+usage: app.py [-h] [-g G] [-b B] [-enc ENC] [-dec DEC] [-r R] [-e E] [-n N] [-d D]
 
 Call function from pubcrypt module
 
-optional arguments:
+options:
   -h, --help  show this help message and exit
   -g G        Generate an RSA keypair. Indicate the bits size as an argument
+  -b B        Launching every benchmark function. Indicate the iteration
   -enc ENC    encryption your data
   -dec DEC    decrypt your data
   -r R        recover your primes factor. Indicate the public modulus as an argument
@@ -90,7 +91,7 @@ pubcrypt/number/util.py:
 | lcm                    | a, b            | lcm of a and b |
 | pair wise consistency test | m, e, n     | True or False  |
 | isqrt                  | x               | square root of x |
-| perfect_square         | c               | PERFECT_SQUARE or NOT_PERFECT_SQUARE |
+| perfect_square         | c               | True if perfect square else False |
 
 -----------------------------------------------------
 
@@ -99,8 +100,8 @@ pubcrypt/number/random.py
 | :--------------:       |:---------------:| :-----------------:|
 | RBG                    | nBits           | a bit string of nBits          |
 | RNG                    | nBits           | an integer of nBits            |
-| int_to_bytes           | a, b            | a bit string representing the integer x    |
-| bytes_to_int           | m, e, n         | an integer representing the string x       |
+| int_to_string          | x, xLen, order="big"        | convert an nonnegative integer into a string of xLen octet    |
+| string_to_int          | x, order="big               | convert an octet string into a number      |
 
 
 A more precise description is available below each function
