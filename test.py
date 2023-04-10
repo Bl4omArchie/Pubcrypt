@@ -23,6 +23,9 @@ def launch_test():
         ValueError("Test failed")
 
 
+def new_test():
+    pass
+
 
 if __name__ == "__main__":
     #launch_test()
