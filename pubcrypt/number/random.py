@@ -18,7 +18,3 @@ def bytes_to_int(xbytes: bytes) :
 
 def MGF(seed, mask_len, hash_len):
     if mask_len > pow(2, 32): raise ValueError("Mask too long")
-
-    T = ""
-    for i in range(ceil(mask_len, hash_len)-1):
-        

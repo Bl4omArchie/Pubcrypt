@@ -1,4 +1,4 @@
-from pubcrypt.number.random import RBG, bytes_to_int, int_to_bytes
+from pubcrypt.number.random import RBG, bytes_to_int, int_to_bytes, MGF
 from pubcrypt.cryptosystem.rsa import primitive_exp
 from hashlib import sha384
 
