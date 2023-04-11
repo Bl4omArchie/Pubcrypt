@@ -46,7 +46,3 @@ def string_to_int(x, order="big"):
         n <<= 8
         n += byte
     return n
-
-
-def MGF(seed, mask_len, hash_len):
-    if mask_len > pow(2, 32): raise ValueError("Mask too long")
