@@ -1,32 +1,49 @@
-from pubcrypt.number.random import RBG, int_to_string, string_to_int
+from pubcrypt.number.util import int_to_string, string_to_int
 from pubcrypt.cryptosystem.rsa import primitive_exp
-from pubcrypt.hash.sha1 import HASH_SHA1
-from hashlib import sha384
-
-HASH_INPUT_LIMITATION = pow(2, 61)
+from pubcrypt.number.random import RBG
+from hashlib import sha1
 
 
-def rsa_oaep_encrypt(m, e, n, label):
-    message_len = len(m)
-    label_len = len(label)
-    k = len(n)
+HASH_INPUT_LIMITATION = sha1().digest_size
 
-    if label > HASH_INPUT_LIMITATION: raise ValueError ("label too long")
 
-    if message_len > k-2*label_len-2: raise ValueError("message too long")
+
+def rsa_oaep_encrypt(message, e, n, label=b''):
+    k = n.bit_length()
+    mLen = len(message)
     
-    hash_obj = HASH_SHA1()
-
-    ps = RBG(k-message_len-2*hash_obj.hLen-"0x00")
-    db = hash_obj.hLen | ps | "0x01" | m
+    if mLen > k - 2 * HASH_INPUT_LIMITATION - 2: raise ValueError("message too long")
     
-    seed = RBG(hash_obj.hLen)
-    dbMask = hash_obj.mask_function(seed, k-hash_obj.hLen-1)
-    maskedDB = db ^ dbMask
-    seedMask = hash_obj.mask_function(maskedDB, hash_obj.hLen)
-    maskedSeed = seed ^ seedMask
-    em = "0x00" | maskedSeed | maskedDB
+    if len(label) > HASH_INPUT_LIMITATION - 1: 
+        raise ValueError("label too long")
+    else:
+        label = b'da39a3ee5e6b4b0d3255bfef95601890afd80709'
 
-    em = string_to_int(em)
-    ciphertext = primitive_exp(m, e, n)
-    return int_to_string(ciphertext)
+
+    lHash = sha1(label).digest()
+    PS = b'\x00' * (k - mLen - 2 * HASH_INPUT_LIMITATION - 2)
+    DB = lHash + PS + b'\x01' + message
+
+
+    seed = RBG(HASH_INPUT_LIMITATION)
+    dbMask = MGF(seed, k - HASH_INPUT_LIMITATION - 1)
+
+
+    maskedDB = bytes([DB[i] ^ dbMask[i] for i in range(len(dbMask))])
+    seedMask = MGF(maskedDB, HASH_INPUT_LIMITATION)
+    maskedSeed = bytes([seed[i] ^ seedMask[i] for i in range(len(seedMask))])
+
+
+    EM = b'\x00' + maskedSeed + maskedDB
+    c = primitive_exp(int.from_bytes(EM, byteorder='big'), e, n)
+    return string_to_int(c, order='big')
+
+
+def MGF(seed, maskLen):
+    # MGF1 (Mask Generation Function 1) based on SHA-1
+    T = b''
+
+    for i in range((maskLen + HASH_INPUT_LIMITATION - 1) // HASH_INPUT_LIMITATION):
+        C = i.to_bytes(4, byteorder='big')
+        T += sha1(seed + C).digest()
+    return T[:maskLen]
