@@ -9,7 +9,7 @@ from benchmark.gcd import *
 from benchmark.pow import *
 from benchmark.generate import *
 
-import math
+from pubcrypt.number.primality import get_prime_factor
 
 
 """
@@ -45,7 +45,9 @@ def oaep_scheme_test():
     print (rsa_oaep_encrypt(m, e, n))
 
 
+
+
 if __name__ == "__main__":
-    #launch_test()
+    launch_test()
     #convert_test()
-    oaep_scheme_test()
+    #oaep_scheme_test()
