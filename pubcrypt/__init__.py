@@ -1,1 +1,1 @@
-__all__ = ["cryptosystem", "number"]
+__all__ = ["cryptosystem", "number", "scheme"]

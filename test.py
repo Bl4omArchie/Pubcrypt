@@ -13,7 +13,7 @@ from pubcrypt.number.primality import get_prime_factor
 
 
 """
-This test verify that everything work correcly. You can call every functions you want below.
+Those test verify that everything work correcly
 """
 
 
@@ -41,13 +41,13 @@ def convert_test():
 
 def oaep_scheme_test():
     n, e, d = generate(2048, e=65537)
-    m = b"yo les bitches"
+    m = b"verify the oaep scheme"
+    print ("debug")
     print (rsa_oaep_encrypt(m, e, n))
 
 
 
-
 if __name__ == "__main__":
-    launch_test()
+    #launch_test()
     #convert_test()
-    #oaep_scheme_test()
+    oaep_scheme_test()

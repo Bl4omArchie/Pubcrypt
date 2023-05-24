@@ -9,29 +9,35 @@ def get_prime_factor(pBits, e):
     candidate = 0
 
     while candidate == 0:
-        p = RNG(pBits)
-        if p%2 == 0:
-            p += 1
+        while i<5*pBits:
+            p = RNG(pBits)
+            if p%2 == 0:
+                p += 1
 
-        if p >= isqrt(2)*(pow(2, pBits-1)):
-            if gcd(p-1, e) == 1:
-                candidate = miller_rabin(p, 5)
-                break
+            if p >= isqrt(2)*(pow(2, pBits-1)):
+                if gcd(p-1, e) == 1:
+                    candidate = miller_rabin(p, 5)
+                    break
+            i += 1
     return p
+
 
 def get_prime_factor_multi(pBits, e, prime_queue):
     """ Generate a prime factor """
     candidate = 0
+    i = 0
 
     while candidate == 0:
-        p = RNG(pBits)
-        if p%2 == 0:
-            p += 1
+        while i<5*pBits:
+            p = RNG(pBits)
+            if p%2 == 0:
+                p += 1
 
-        if p >= isqrt(2)*(pow(2, pBits-1)):
-            if gcd(p-1, e) == 1:
-                candidate = miller_rabin(p, 5)
-                break
+            if p >= isqrt(2)*(pow(2, pBits-1)):
+                if gcd(p-1, e) == 1:
+                    candidate = miller_rabin(p, 5)
+                    break
+            i += 1
     prime_queue.put(p)
 
 
