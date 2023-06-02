@@ -14,6 +14,7 @@ I've started this project in the purpose of training myself to implemente crypto
   - [Features](#features)
     - [✅ Main branch](#-main-branch)
     - [🚧 pubcrypt-dev](#-pubcrypt-dev)
+    - [Benchmark](#benchmark-1)
   - [Version](#version)
   - [Author](#author)
   - [References](#references)
@@ -33,7 +34,6 @@ Call function from pubcrypt module
 options:
   -h, --help  show this help message and exit
   -g G        Generate an RSA keypair. Indicate the bits size as an argument
-  -b B        Launching every benchmark function. Indicate the iteration
   -enc ENC    encryption your data
   -dec DEC    decrypt your data
   -r R        recover your primes factor. Indicate the public modulus as an argument
@@ -96,16 +96,10 @@ A more precise description is available below each function
 ## Benchmark
 
 My benchmark is comparing different implementation of a same algorithm by mesuring the time it take for N executions.
-At the end it generate graph with matplotlib so you visualize the result. It save the picture in this folder: **benchmark/graph**.
 
 In the same folder, I've made a script for every function I want to evaluate. For example, in the gcd.py script, I putted different implementation of the gcd() function and at the end, I can see which one is the more efficient and put in my library.
 
-You can regenerate every graph with the **-b** option in the command line version or calling the **launching_bench()** function in test.py
-Example: 
-```
-python3 app.py -b 10  
-``` 
-It will repeat every function 10 times.
+For now the benchmark is only available in the Benchmark branch. I'm writting a notebook talking about the choices I made for my library.
 
 ## Features
 
@@ -117,9 +111,13 @@ It will repeat every function 10 times.
 - Command line version: app.py
 
 ### 🚧 pubcrypt-dev
-- benchmark notebook
 - improve app.py with a file argument where you can indicate your value directly from a file.
 - OAEP: encryption, decryption and signature methods
+- parallel keypair generation: I'm trying to generate primes numbers at the same time so the key can be generated faster
+
+### Benchmark
+- benchmark notebook
+- general function for plotting graph
 
 
 ## Version
