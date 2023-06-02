@@ -8,12 +8,6 @@ from benchmark.gcd import *
 from benchmark.pow import *
 from benchmark.generate import *
 
-from pubcrypt.number.primality import get_prime_factor
-
-
-"""
-Those test verify that everything work correcly
-"""
 
 
 def launch_test():

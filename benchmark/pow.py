@@ -34,6 +34,8 @@ def launch_pow_bench(n):
         plot_y[1].append(time.time() - start_time)
         plot_x[1].append(_)
 
+    
+
     plt.plot(plot_x[0], plot_y[0], color="green", label="python_pow()")
     plt.plot(plot_x[1], plot_y[1], color="blue", label="binary_gcd()")
     #plt.plot(plot_x[2], plot_y[2], color="red", label="binary_gcd_assembly_improve()")
