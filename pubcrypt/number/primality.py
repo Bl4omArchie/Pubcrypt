@@ -1,5 +1,5 @@
 from pubcrypt.number.util import pow_mod, gcd, isqrt
-from pubcrypt.number.random import RNG
+from pubcrypt.number.util import RNG
 from random import randrange
 
 

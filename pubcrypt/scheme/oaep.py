@@ -1,6 +1,6 @@
 from pubcrypt.number.util import int_to_string, string_to_int
 from pubcrypt.cryptosystem.rsa import primitive_exp
-from pubcrypt.number.random import RBG
+from pubcrypt.number.util import RBG
 from hashlib import sha1
 
 

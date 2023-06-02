@@ -1,6 +1,5 @@
 from pubcrypt.cryptosystem.rsa import *
 from pubcrypt.number.primality import *
-from pubcrypt.number.random import *
 from pubcrypt.number.util import *
 
 from pubcrypt.scheme.oaep import rsa_oaep_encrypt
@@ -25,29 +24,34 @@ def launch_test():
         get_prime_factor(1024, 65537)
         
     except:
-        ValueError("Test failed")
+        print ("[!] KeyPair generation failed")
 
 
 def convert_test():
     """ Verify that the int_to_string and string_to_int work well """
-    n = 65537
-    string = int_to_string(n, ceil(n.bit_length()/8), "little")
-    n2 = string_to_int(string, "little")
+    try:
+        n = 65537
+        string = int_to_string(n, ceil(n.bit_length()/8), "little")
+        n2 = string_to_int(string, "little")
 
-    print (f"n: {n} | type: {type(n)}")
-    print (f"string: {string} - type: {type(string)}")
-    print (f"n2: {n2} | type: {type(n2)}")
+        print (f"n: {n} | type: {type(n)}")
+        print (f"string: {string} - type: {type(string)}")
+        print (f"n2: {n2} | type: {type(n2)}")
+    except:
+        print ("[!] Convert test failed")
 
 
 def oaep_scheme_test():
-    n, e, d = generate(2048, e=65537)
-    m = b"verify the oaep scheme"
-    print ("debug")
-    print (rsa_oaep_encrypt(m, e, n))
+    try:
+        n, e, d = generate(2048, e=65537)
+        m = b"verify the oaep scheme"
+        rsa_oaep_encrypt(m, e, n)
+    except:
+        print ("[!] OAEP scheme encryption failed")
 
 
 
 if __name__ == "__main__":
-    #launch_test()
-    #convert_test()
+    launch_test()
+    convert_test()
     oaep_scheme_test()
