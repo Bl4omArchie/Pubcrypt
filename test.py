@@ -2,50 +2,42 @@ from pubcrypt.cryptosystem.rsa import *
 from pubcrypt.number.primality import *
 from pubcrypt.number.util import *
 
-from pubcrypt.scheme.oaep import rsa_oaep_encrypt
-
 from benchmark.gcd import *
 from benchmark.pow import *
 from benchmark.generate import *
 
+import time
 
 
-def launch_test():
-    """ Launch this script to see if everything in pubcrypt module is working """
+
+def simulation():
+    """ This function verify that the module RSA work and give the execution time """
+
     try:
-        n, e, d = generate(2048, e=65537)
-        prime_recovery(n, e, d)
-        get_prime_factor(1024, 65537)
-        
+        #key size: 2048
+        start1 = time.time()
+        generate(2048)
+        end1 = time.time()
+
+        #key size: 4096
+        start2 = time.time()
+        generate(2048)
+        end2 = time.time()
+
+        #key size: 8196
+        start3 = time.time()
+        generate(2048)
+        end3 = time.time()
+
+        print ("-------- Generation ------")
+        print (f"key = 2048: {end1-start1} ")
+        print (f"key = 4096: {end2-start2} ")
+        print (f"key = 8196: {end3-start3} ")
+        print ("--------------------------")
     except:
-        print ("[!] KeyPair generation failed")
-
-
-def convert_test():
-    """ Verify that the int_to_string and string_to_int work well """
-    try:
-        n = 65537
-        string = int_to_string(n, ceil(n.bit_length()/8), "little")
-        n2 = string_to_int(string, "little")
-
-        print (f"n: {n} | type: {type(n)}")
-        print (f"string: {string} - type: {type(string)}")
-        print (f"n2: {n2} | type: {type(n2)}")
-    except:
-        print ("[!] Convert test failed")
-
-
-def oaep_scheme_test():
-    try:
-        n, e, d = generate(2048, e=65537)
-        m = b"verify the oaep scheme"
-        rsa_oaep_encrypt(m, e, n)
-    except:
-        print ("[!] OAEP scheme encryption failed")
+        print ("[!] generation() has failed")
 
 
 
 if __name__ == "__main__":
-    launch_test()
-    convert_test()
-    oaep_scheme_test()
+    simulation()
