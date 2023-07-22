@@ -1,6 +1,6 @@
 from math import floor, log2, ceil
 from random import getrandbits
-from math import ceil
+from math import ceil   
 
 
 def RBG(nBits):
