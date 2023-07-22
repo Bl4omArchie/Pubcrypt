@@ -32,16 +32,13 @@ def convert_test():
 
 
 def oaep_scheme_test():
-    try:
-        n, e, d = generate(2048, e=65537)
-        m = b"verify the oaep scheme"
-        rsa_oaep_encrypt(m, e, n)
-    except:
-        print ("[!] OAEP scheme encryption failed")
+    n, e, d = generate(2048, e=65537)
+    m = b"verify the oaep scheme"
+    print (rsa_oaep_encrypt(m, e, n))
 
 
 
 if __name__ == "__main__":
-    launch_test()
-    convert_test()
+    #launch_test()
+    #convert_test()
     oaep_scheme_test()
