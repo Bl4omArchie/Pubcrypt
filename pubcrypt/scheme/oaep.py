@@ -12,9 +12,6 @@ labels = {
 
 HASH_INPUT_LIMITATION = sha1().digest_size
 
-print (HASH_INPUT_LIMITATION)
-
-
 
 def rsa_oaep_encrypt(message, e, n, hash="sha1", label=b''):
     k = n.bit_length()
@@ -39,6 +36,8 @@ def rsa_oaep_encrypt(message, e, n, hash="sha1", label=b''):
 
     maskedDB = bytes([DB[i] ^ dbMask[i] for i in range(len(dbMask))])
     seedMask = MGF(maskedDB, HASH_INPUT_LIMITATION)
+    print (seed)
+    print (seedMask)
     maskedSeed = bytes([seed[i] ^ seedMask[i] for i in range(len(seedMask))])
 
 
