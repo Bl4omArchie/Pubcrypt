@@ -94,17 +94,7 @@ A more precise description is available below each function
 
 ## Benchmark
 
-My benchmark is comparing different implementation of a same algorithm by mesuring the time it take for N executions.
-At the end it generate graph with matplotlib so you visualize the result. It save the picture in this folder: **benchmark/graph**.
-
-In the same folder, I've made a script for every function I want to evaluate. For example, in the gcd.py script, I putted different implementation of the gcd() function and at the end, I can see which one is the more efficient and put in my library.
-
-You can regenerate every graph with the **-b** option in the command line version or calling the **launching_bench()** function in test.py
-Example: 
-```
-python3 app.py -g 2048
-``` 
-It will repeat every function 10 times.
+Refactoring...
 
 ## Features
 
