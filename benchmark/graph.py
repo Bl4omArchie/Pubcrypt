@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-size = (8, 5)
+size = (10, 8)
 
 
 
