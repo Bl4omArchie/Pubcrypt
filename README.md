@@ -21,7 +21,7 @@ I've started this project in the purpose of training myself to implemente crypto
 ##  Installation
 
 Install the very last version: ```git clone https://github.com/Bl4omArchie/pubcrypt``` <br>
-Install the last stable version: https://github.com/Bl4omArchie/pubcrypt/releases/tag/v1.0
+Install the last stable version: https://github.com/Bl4omArchie/pubcrypt/releases/tag/v1.2
 
 Once you installed the package, you can call function from the test.py file.
 With the app.py file, call directly your function from the command line:
@@ -33,7 +33,6 @@ Call function from pubcrypt module
 options:
   -h, --help  show this help message and exit
   -g G        Generate an RSA keypair. Indicate the bits size as an argument
-  -b B        Launching every benchmark function. Indicate the iteration
   -enc ENC    encryption your data
   -dec DEC    decrypt your data
   -r R        recover your primes factor. Indicate the public modulus as an argument
@@ -103,7 +102,7 @@ In the same folder, I've made a script for every function I want to evaluate. Fo
 You can regenerate every graph with the **-b** option in the command line version or calling the **launching_bench()** function in test.py
 Example: 
 ```
-python3 app.py -b 10  
+python3 app.py -g 2048
 ``` 
 It will repeat every function 10 times.
 
@@ -113,13 +112,13 @@ It will repeat every function 10 times.
 - RSA keypair generation function: generate()
 - Factor recovery from public and private key: prime_recovery()
 - Random Prime Generator: get_prime_factor() and miller_rabin()
-- Arithmetic function: util.py
 - Command line version: app.py
+- Improvement of Miller-Rabin (see pdf in the pdf folder)
 
 ### 🚧 pubcrypt-dev
-- benchmark notebook
 - improve app.py with a file argument where you can indicate your value directly from a file.
 - OAEP: encryption, decryption and signature methods
+- file format PEM
 
 
 ## Version
@@ -128,6 +127,7 @@ It will repeat every function 10 times.
 | :--------------: |:---------------:|
 | v1.0             | first stable version of pubcrypt. Can generate, encrypt, decrypt and recover prime factors        |
 | v1.1             | command line version added        |
+| v1.2             | miller-rabin improvement that allow to generate key pairs faster      |
 
 
 ## Author
