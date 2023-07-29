@@ -11,7 +11,7 @@ I've started this project in the purpose of training myself to implemente crypto
   - [Installation](#installation)
   - [Documentation](#documentation)
   - [Benchmark](#benchmark)
-  - [Plan](#plan)
+  - [Features](#features)
     - [✅ Main branch](#-main-branch)
     - [🚧 pubcrypt-dev](#-pubcrypt-dev)
   - [Version](#version)
@@ -73,14 +73,6 @@ pubcrypt/number/primality.py:
 r = number of round for Miller Rabin primality test. Set to 5
 ``` 
 
------------------------------------
-
-pubcrypt/number/random.py:
-| functions              | Parameters      | Return             |
-| :--------------:       |:---------------:| :-----------------:|
-| get_prime_factors      | pBits, e        |  a prime p         |
-| miller_rabin           | p, r            | PRIME or NOT_PRIME |
-
 ----------------------------------------
 
 pubcrypt/number/util.py:
@@ -92,16 +84,10 @@ pubcrypt/number/util.py:
 | pair wise consistency test | m, e, n     | True or False  |
 | isqrt                  | x               | square root of x |
 | perfect_square         | c               | True if perfect square else False |
-
------------------------------------------------------
-
-pubcrypt/number/random.py
-| functions              | Parameters      | Return             |
-| :--------------:       |:---------------:| :-----------------:|
 | RBG                    | nBits           | a bit string of nBits          |
 | RNG                    | nBits           | an integer of nBits            |
-| int_to_string          | x, xLen, order="big"        | convert an nonnegative integer into a string of xLen octet    |
-| string_to_int          | x, order="big               | convert an octet string into a number      |
+
+-----------------------------------------------------
 
 
 A more precise description is available below each function
@@ -121,19 +107,19 @@ python3 app.py -b 10
 ``` 
 It will repeat every function 10 times.
 
-## Plan
+## Features
 
 ### ✅ Main branch
-- generate(), primitive_exp(), prime_recovery()
-- Miller Rabin primality test
-- README + gitignore
-- app.py: where you can use the library with command from the terminal
-- benchmark
+- RSA keypair generation function: generate()
+- Factor recovery from public and private key: prime_recovery()
+- Random Prime Generator: get_prime_factor() and miller_rabin()
+- Arithmetic function: util.py
+- Command line version: app.py
 
 ### 🚧 pubcrypt-dev
-- pdf with graph an tutorial
+- benchmark notebook
 - improve app.py with a file argument where you can indicate your value directly from a file.
-- PKCS: encryption, decryption and signature methods
+- OAEP: encryption, decryption and signature methods
 
 
 ## Version

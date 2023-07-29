@@ -1,6 +1,6 @@
-from pubcrypt.number.util import pow_mod, gcd, isqrt
-from pubcrypt.number.random import RNG
-from random import randrange
+from pubcrypt.number.util import gcd, isqrt
+from pubcrypt.number.util import RNG
+from random import randint
 
 
 def get_prime_factor(pBits, e):
@@ -23,25 +23,21 @@ def get_prime_factor(pBits, e):
 
 
 def miller_rabin(p, r):
-    """Credit: https://rosettacode.org/wiki/Miller%E2%80%93Rabin_primality_test#Python"""
-    s = 0
-    d = p-1
-    while d%2==0:
-        d>>=1
-        s+=1
-    assert(pow(2, s) * d == p-1)
-    
-    def trial_composite(a):
-        if pow_mod(a, d, p) == 1:
+    s, d = 0, p - 1
+    while d % 2 == 0:
+        d >>= 1
+        s += 1
+
+    for _ in range(r):
+        a = randint(2, p - 2)
+        x = pow(a, d, p)
+        if x == 1 or x == p - 1:
+            continue
+        for _ in range(s - 1):
+            x = pow(x, 2, p)
+            if x == p - 1:
+                break
+        else:
             return 0
 
-        for i in range(s):
-            if pow_mod(a, pow(2, i) * d, p) == p-1:
-                return 0
-        return 1  
-    
-    for _ in range(r): #number of trials 
-        a = randrange(2, p)
-        if trial_composite(a):
-            return 0
     return 1
