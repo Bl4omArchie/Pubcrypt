@@ -30,14 +30,21 @@ def invmod(z, a):
 
 
 def gcd(x, y):
-    r = [x, y]
-    i = 1
-    while r[i] >= 0:
-        i += 1
-        r.append(r[i-2] % r[i-1])
+    if x == 0:
+        return y
+    if y == 0:
+        return x
 
-        if r[i] == 0:
-            return r[i-1]
+    x_rightmost = x & -x
+    y_rightmost = y & -y
+
+    while x_rightmost != y_rightmost:
+        if x_rightmost > y_rightmost:
+            x_rightmost >>= 1
+        else:
+            y_rightmost >>= 1
+
+    return x_rightmost
 
 
 def lcm(x, y):

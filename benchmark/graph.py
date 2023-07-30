@@ -18,7 +18,7 @@ def make_simple_plot(array, title, label, color):
 
 
 
-def make_n_plot(arrays, title, labels, colors):
+def make_n_plot(type, arrays, title, labels, colors):
     size_data = []
     for data in arrays:
         size_data.append(len(data))
@@ -27,7 +27,10 @@ def make_n_plot(arrays, title, labels, colors):
     fig.suptitle(title, fontsize=15)
 
     for i in range(len(arrays)):
-        plt.plot(np.linspace(1, size_data[i], size_data[i]), arrays[i], color=colors[i], label=labels[i])
+        if type == "plot":
+            plt.plot(np.linspace(1, size_data[i], size_data[i]), arrays[i], color=colors[i], label=labels[i])
+        elif type == "point":
+            plt.scatter(np.linspace(1, size_data[i], size_data[i]), arrays[i], color=colors[i], label=labels[i])
 
     plt.xlabel('number of execution')
     plt.ylabel('execution time in second')
