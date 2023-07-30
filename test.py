@@ -1,11 +1,26 @@
-from benchmark.generate_bench import get_time
-from benchmark.graph import make_simple_plot
+from benchmark.generate import get_time
+from benchmark.conversion import get_time_converting
+from benchmark.isqrt import get_time_isqrt
+from benchmark.fast_expo import get_time_fast_expo
+
+from benchmark.graph import *
 
 
 def simulation():
-    time = get_time(10, 2048)
-    make_simple_plot(time, "Generate function with old MillerRabin", "generate()", "red")
+    """
+    time = get_time(50, 2048)
+    make_simple_plot(time, "generate() with new binary algorithm", "generate()", "red")
 
+    time1, time2 = get_time_converting(1000)
+    make_dual_plot((time1, time2), "Comparing conversion integer to binary", ("original", "new"), ("red", "green"))
+
+    time1, time2 = get_time_isqrt(1000)
+    make_dual_plot((time1, time2), "Comparing isqrt", ("original", "new"), ("red", "green"))
+    """
+
+    time1, time2, time3 = get_time_fast_expo(50)
+    make_n_plot((time1, time2, time3), "Comparing several fast modular exponentiation function", ("old", "new", "python"), ("red", "green", "purple"))
+    
 
 if __name__ == "__main__":
     simulation()
