@@ -110,6 +110,9 @@ Refactoring...
 - OAEP: encryption, decryption and signature methods
 - file format PEM
 
+### Binary_improvement
+This branch replace every "normal" operators (like addition, substraction etc) with binary operations (shift, AND, OR etc)
+
 
 ## Version
 
@@ -118,6 +121,7 @@ Refactoring...
 | v1.0             | first stable version of pubcrypt. Can generate, encrypt, decrypt and recover prime factors        |
 | v1.1             | command line version added        |
 | v1.2             | miller-rabin improvement that allow to generate key pairs faster      |
+| v1.3             | binary improvement: replace all operators with binary operators      |
 
 
 ## Author

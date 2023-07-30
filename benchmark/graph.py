@@ -12,6 +12,9 @@ def make_simple_plot(array, title, label, color):
     fig.suptitle(title, fontsize=15)
     plt.plot(np.linspace(1, len(array), len(array)), array, color=color, label=label)
 
+    plt.xlabel('number of execution')
+    plt.ylabel('execution time in second')
+
     plt.legend(loc="upper right", title="Legend", frameon=False)
     plt.savefig(path+title+".png")
 
