@@ -14,6 +14,7 @@ I've started this project in the purpose of training myself to implemente crypto
   - [Features](#features)
     - [✅ Main branch](#-main-branch)
     - [🚧 pubcrypt-dev](#-pubcrypt-dev)
+    - [Binary\_improvement](#binary_improvement)
   - [Version](#version)
   - [Author](#author)
   - [References](#references)
@@ -26,7 +27,7 @@ Install the last stable version: https://github.com/Bl4omArchie/pubcrypt/release
 Once you installed the package, you can call function from the test.py file.
 With the app.py file, call directly your function from the command line:
 ``` 
-usage: app.py [-h] [-g G] [-b B] [-enc ENC] [-dec DEC] [-r R] [-e E] [-n N] [-d D]
+usage: app.py [-h] [-g G] [-enc ENC] [-dec DEC] [-r R] [-e E] [-n N] [-d D]
 
 Call function from pubcrypt module
 
@@ -94,7 +95,12 @@ A more precise description is available below each function
 
 ## Benchmark
 
-Refactoring...
+After few differents attempts, I finally find out the best way to evaluate my code effiency and write a decent benchmark so that my coding environnement could be perfect.
+I recently eard about cProfile, a default packages of the python language that offer a very code tracability of the code behaviour. 
+For instance, if you want to test a function, this package will create a profile that show the execution time of the function but also ...
+
+With this package, I can write a clean benchmark: every function has is profile, I can precisly see if the function is efficient and if not, what part of the function is slow. Then, I can easily extract this data, so I could plot them in a graph with matplotlib. 
+I can easily add a function to the benchmark or remove it.
 
 ## Features
 
