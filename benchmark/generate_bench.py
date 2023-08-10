@@ -1,7 +1,5 @@
 from pubcrypt.cryptosystem.rsa import generate
-from random import randint
 import time
-
 
 
 def get_time(n, nBits):
