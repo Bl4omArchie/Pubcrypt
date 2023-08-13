@@ -12,8 +12,7 @@ def generate(nBits, e=65537):
 
     pBits = nBits//2
     
-    p = get_prime_factor(pBits, e) 
-    q = get_prime_factor(pBits, e)
+    p, q = get_prime_factor(pBits, e) 
     d = invmod(e, lcm(p-1, q-1))
     n = p*q
 

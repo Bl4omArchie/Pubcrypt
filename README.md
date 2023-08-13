@@ -65,7 +65,7 @@ p, q = first and second prime factor <br>
 pubcrypt/number/primality.py:
 | functions              | Parameters      | Return             |
 | :--------------:       |:---------------:| :-----------------:|
-| get_prime_factors      | pBits, e        |  a prime p         |
+| get_prime_factors      | pBits, e        |  prime factor p and q         |
 | miller_rabin           | p, r            | PRIME or NOT_PRIME |
 
 ``` 

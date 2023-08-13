@@ -1,5 +1,5 @@
 from pubcrypt.number.util import gcd, isqrt
-from pubcrypt.number.util import RNG
+from pubcrypt.number.util import RNG, pow_mod
 from random import randint
 
 
@@ -19,7 +19,21 @@ def get_prime_factor(pBits, e):
                     candidate = miller_rabin(p, 5)
                     break
             i += 1
-    return p
+
+    i = 0
+    candidate = 0
+    while candidate == 0:
+        while i<5*pBits:
+            q = RNG(pBits)
+            if q%2 == 0:
+                q += 1
+
+            if (abs(p-q) > pow(2, pBits/2-100)) or q >= isqrt(2)*(pow(2, pBits-1)):
+                if gcd(q-1, e) == 1:
+                    candidate = miller_rabin(q, 5)
+                    break
+            i += 1
+    return p, q
 
 
 def miller_rabin(p, r):
