@@ -9,7 +9,6 @@ def generate(nBits, e=65537):
     
     elif e%2 == 0 or not pow(2, 16) <= e <= pow(2, 256):
         raise ValueError("Incorrect puclic exponent. e must be odd and in the range [2^16, 2^256]")
-
     pBits = nBits//2
     
     p, q = get_prime_factor(pBits, e) 
@@ -25,7 +24,7 @@ def generate(nBits, e=65537):
 def primitive_exp(m, exp, n):
     """ This function represent the encryption/decryption/signature operation """
     if 0 < m < n-1:
-        return pow_mod(m, exp, n)
+        return pow(m, exp, n)
 
     else:
         raise ValueError("Data representative out of range")
