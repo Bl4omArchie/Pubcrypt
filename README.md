@@ -12,8 +12,6 @@ I've started this project in the purpose of training myself to implemente crypto
   - [Documentation](#documentation)
   - [Benchmark](#benchmark)
   - [Features](#features)
-    - [✅ Main branch](#-main-branch)
-    - [🚧 pubcrypt-dev](#-pubcrypt-dev)
   - [Version](#version)
   - [Author](#author)
   - [References](#references)
@@ -26,7 +24,7 @@ Install the last stable version: https://github.com/Bl4omArchie/pubcrypt/release
 Once you installed the package, you can call function from the test.py file.
 With the app.py file, call directly your function from the command line:
 ``` 
-usage: app.py [-h] [-g G] [-b B] [-enc ENC] [-dec DEC] [-r R] [-e E] [-n N] [-d D]
+usage: app.py [-h] [-g G] [-enc ENC] [-dec DEC] [-r R] [-e E] [-n N] [-d D]
 
 Call function from pubcrypt module
 
@@ -57,7 +55,8 @@ n = public modulus <br>
 e = public exponent <br>
 d = private exponent <br>
 exp = public or private exponent <br>
-p, q = first and second prime factor <br>
+p, q = first and second primeArithmetic algorithm: gcd, lcm, sqrt, fast_exponentiation, 
+ factor <br>
 ``` 
 
 ------------------------------------------
@@ -98,17 +97,10 @@ Refactoring...
 
 ## Features
 
-### ✅ Main branch
-- RSA keypair generation function: generate()
-- Factor recovery from public and private key: prime_recovery()
-- Random Prime Generator: get_prime_factor() and miller_rabin()
-- Command line version: app.py
-- Improvement of Miller-Rabin (see pdf in the pdf folder)
-
-### 🚧 pubcrypt-dev
-- improve app.py with a file argument where you can indicate your value directly from a file.
-- OAEP: encryption, decryption and signature methods
-- file format PEM
+Main product:
+- RSA keypair generator
+- RSA message encryption and decryption
+- RSA prime factors recovery
 
 
 ## Version
@@ -118,6 +110,7 @@ Refactoring...
 | v1.0             | first stable version of pubcrypt. Can generate, encrypt, decrypt and recover prime factors        |
 | v1.1             | command line version added        |
 | v1.2             | miller-rabin improvement that allow to generate key pairs faster      |
+| v1.3             | correction of the get_prime_factor function |
 
 
 ## Author
