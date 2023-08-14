@@ -7,5 +7,5 @@ def plot_line():
 def plot_scatter():
     pass
 
-def plot_hesit():
+def plot_heist():
     pass

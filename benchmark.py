@@ -1,4 +1,5 @@
 from pubcrypt.number.primality import get_prime_factor
+from benchmark.profiler import *
 import cProfile, random, os, sys
 
 
@@ -25,4 +26,4 @@ def execute3(n):
         os.urandom(1024)
 
 if __name__ == "__main__":
-    cProfile.run('get_prime_factor(1024, 65537)')
+    create_profile(1, "generate")
