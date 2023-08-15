@@ -20,3 +20,7 @@ def create_profile(fnum, profile_name):
 def read_profile(profile_name):
     p = pstats.Stats(path+profile_name+sufix)
     return p.strip_dirs().sort_stats(-1).print_stats()
+
+
+if __name__ == "__main__":
+    create_profile(1, "generate")
