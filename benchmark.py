@@ -1,29 +1,18 @@
+from pubcrypt.cryptosystem.rsa import generate, prime_recovery
 from pubcrypt.number.primality import get_prime_factor
+from benchmark.plotting import *
 from benchmark.profiler import *
-import cProfile, random, os, sys
 
 
-"""
-python3 app.py -b generate 2048 50
+def plotting_sample():
+    obj = GraphVisualization("Function generate")
+    obj.measure_execution_time(5, generate, 2048)
+    obj.plot_data(["green"], ["generate()"], show_stats=False, show_regression=True)
 
-python3 app.py -plot generate scatter
-
-"""
-
-mini = pow(2, 1024)
-maxi = pow(2, 1025)
-
-def execute1(n):
-    for i in range(n):
-        random.randint(mini, maxi-1)
-
-def execute2(n):
-    for i in range(n):
-        random.randrange(mini, maxi-1)
-
-def execute3(n):
-    for i in range(n):
-        os.urandom(1024)
+def profile_sample():
+    obj = EffiencyProfile(get_prime_factor)
+    obj.create_profile(1024, 65537)
+    obj.read_profile()
 
 if __name__ == "__main__":
-    create_profile(1, "generate")
+    plotting_sample()

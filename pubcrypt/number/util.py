@@ -51,16 +51,16 @@ def lcm(x, y):
     return (x*y) // gcd(x, y)
 
 
-def pow_fast(x, e, m=None):
+def pow_fast(b, e, m=None):
     result = 1
     while e > 0:
         if e & 1:
-            result *= x
+            result *= b
             if m:
                 result %= m
-        x *= x
+        b *= b
         if m:
-            x %= m
+            b %= m
         e >>= 1
 
     if m:
