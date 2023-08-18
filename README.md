@@ -12,9 +12,6 @@ I've started this project in the purpose of training myself to implemente crypto
   - [Documentation](#documentation)
   - [Benchmark](#benchmark)
   - [Features](#features)
-    - [✅ Main branch](#-main-branch)
-    - [🚧 pubcrypt-dev](#-pubcrypt-dev)
-    - [Binary\_improvement](#binary_improvement)
   - [Version](#version)
   - [Author](#author)
   - [References](#references)
@@ -58,7 +55,8 @@ n = public modulus <br>
 e = public exponent <br>
 d = private exponent <br>
 exp = public or private exponent <br>
-p, q = first and second prime factor <br>
+p, q = first and second primeArithmetic algorithm: gcd, lcm, sqrt, fast_exponentiation, 
+ factor <br>
 ``` 
 
 ------------------------------------------
@@ -66,7 +64,7 @@ p, q = first and second prime factor <br>
 pubcrypt/number/primality.py:
 | functions              | Parameters      | Return             |
 | :--------------:       |:---------------:| :-----------------:|
-| get_prime_factors      | pBits, e        |  a prime p         |
+| get_prime_factors      | pBits, e        |  prime factor p and q         |
 | miller_rabin           | p, r            | PRIME or NOT_PRIME |
 
 ``` 
@@ -104,20 +102,10 @@ I can easily add a function to the benchmark or remove it.
 
 ## Features
 
-### ✅ Main branch
-- RSA keypair generation function: generate()
-- Factor recovery from public and private key: prime_recovery()
-- Random Prime Generator: get_prime_factor() and miller_rabin()
-- Command line version: app.py
-- Improvement of Miller-Rabin (see pdf in the pdf folder)
-
-### 🚧 pubcrypt-dev
-- improve app.py with a file argument where you can indicate your value directly from a file.
-- OAEP: encryption, decryption and signature methods
-- file format PEM
-
-### Binary_improvement
-This branch replace every "normal" operators (like addition, substraction etc) with binary operations (shift, AND, OR etc)
+Main product:
+- RSA keypair generator
+- RSA message encryption and decryption
+- RSA prime factors recovery
 
 
 ## Version
@@ -127,7 +115,7 @@ This branch replace every "normal" operators (like addition, substraction etc) w
 | v1.0             | first stable version of pubcrypt. Can generate, encrypt, decrypt and recover prime factors        |
 | v1.1             | command line version added        |
 | v1.2             | miller-rabin improvement that allow to generate key pairs faster      |
-| v1.3             | binary improvement: replace all operators with binary operators      |
+| v1.3             | correction of the get_prime_factor function |
 
 
 ## Author
