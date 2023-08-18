@@ -23,10 +23,6 @@ def invmod(z, a):
         q = i // j
         r = i - (j * q)
         y = y2 - (y1 * q)
-    while j > 0:
-        q = i // j
-        r = i - (j * q)
-        y = y2 - (y1 * q)
         i, j = j, r
         y2, y1 = y1, y
 
@@ -55,16 +51,16 @@ def lcm(x, y):
     return (x*y) // gcd(x, y)
 
 
-def pow_fast(x, e, m=None):
+def pow_fast(b, e, m=None):
     result = 1
     while e > 0:
         if e & 1:
-            result *= x
+            result *= b
             if m:
                 result %= m
-        x *= x
+        b *= b
         if m:
-            x %= m
+            b %= m
         e >>= 1
 
     if m:
@@ -85,12 +81,7 @@ def isqrt (x):
         if t >= 0:
             z, r = t, r + q
     return r
-    while q > 1:
-        q >>= 2   # Equivalent to q //= 4, but using bitwise shift for better performance
-        t, r = z - r - q, r >> 1   # Equivalent to r //= 2, but using bitwise shift for better performance
-        if t >= 0:
-            z, r = t, r + q
-    return r
+
 
 def perfect_square(c):
     n = floor(log2(abs(c))) + 1
