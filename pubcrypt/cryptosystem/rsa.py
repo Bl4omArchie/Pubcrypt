@@ -17,7 +17,6 @@ def generate(nBits, e=65537):
 
     if pair_wise_consistency_test(n, e, d) == 0:
         raise ValueError("Error, please retry. Consistency test failed")
-
     return n, e, d
 
 

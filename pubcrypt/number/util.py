@@ -63,9 +63,14 @@ def pow_fast(b, e, m=None):
             b %= m
         e >>= 1
 
+        if b == 0 and m:
+            b = 1  
+        if m == 0:
+            m = 1 
     if m:
         result %= m
     return result
+
 
 def isqrt (x):
     q = 1

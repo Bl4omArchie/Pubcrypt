@@ -18,8 +18,8 @@ There is two examples:
 
 def plotting_sample():
     obj = GraphVisualization("Function generate")
-    obj.measure_execution_time(100, generate, 2048)
-    obj.plot_data(["green"], ["generate()"], show_stats=False, show_regression=True)
+    obj.measure_execution_time(150, generate, 2048)
+    obj.plot_data(["green"], ["generate()"], show_stats=True)
 
 def profile_sample():
     obj = EffiencyProfile(get_prime_factor)

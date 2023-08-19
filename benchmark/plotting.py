@@ -20,7 +20,7 @@ class GraphVisualization:
         self.execution_times.append(func_times)
 
 
-    def plot_data(self, colors, labels, graph_type='lines', show_stats=False, show_regression=False):
+    def plot_data(self, colors, labels, graph_type='lines', show_stats=False):
         if len(self.execution_times) != len(colors) or len(self.execution_times) != len(labels):
             raise ValueError("Lengths of execution_times, colors, and labels should be the same.")
         
@@ -29,14 +29,21 @@ class GraphVisualization:
 
         plt.figure(figsize=self.size)
         for i in range(len(self.execution_times)):
-            data_chunck_size = len(self.execution_times[i])
+            data_chunk_size = len(self.execution_times[i])
             if graph_type == 'lines':
-                plt.plot(np.linspace(0, data_chunck_size, data_chunck_size), self.execution_times[i], color=colors[i], label=labels[i])
+                plt.plot(np.linspace(0, data_chunk_size, data_chunk_size), self.execution_times[i], color=colors[i], label=labels[i])
 
+            if show_stats:
+                min_value = np.min(self.execution_times[i])
+                max_value = np.max(self.execution_times[i])
+                mean_value = np.mean(self.execution_times[i])
+                plt.text(data_chunk_size, min_value, f"Min: {min_value:.2f}", verticalalignment='bottom', horizontalalignment='right')
+                plt.text(data_chunk_size, max_value, f"Max: {max_value:.2f}", verticalalignment='top', horizontalalignment='right')
+                plt.text(data_chunk_size, mean_value, f"Mean: {mean_value:.2f}", verticalalignment='top', horizontalalignment='right')
 
         plt.title(self.title)
         plt.xlabel('Test Iteration')
         plt.ylabel('Elapsed Time (seconds)')
         plt.legend()
         plt.grid(True)
-        plt.savefig(self.path+self.title)
+        plt.savefig(self.path + self.title)
