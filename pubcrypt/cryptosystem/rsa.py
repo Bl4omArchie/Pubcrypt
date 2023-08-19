@@ -24,7 +24,7 @@ def generate(nBits, e=65537):
 def primitive_exp(m, exp, n):
     """ This function represent the encryption/decryption/signature operation """
     if 0 < m < n-1:
-        return pow(m, exp, n)
+        return pow_fast(m, exp, n)
 
     else:
         raise ValueError("Data representative out of range")

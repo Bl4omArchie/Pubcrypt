@@ -1,4 +1,6 @@
-import time, cProfile, pstats
+import cProfile, pstats
+import numpy as np
+import matplotlib.pyplot as plt
 
 
 path = "benchmark/profiles/"
@@ -7,6 +9,7 @@ sufix = ".ep"
 class EffiencyProfile:
     def __init__(self, func):
         self.func = func
+        self.size = (10, 8)
         self.func_name = str(func)
         self.profile_file = path + f"{self.func_name}" + sufix
 

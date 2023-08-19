@@ -27,7 +27,7 @@ def get_prime_factor(pBits, e):
             if q & 1 == 0:
                 q |= 1
 
-            if (abs(p-q) > pow(2, (pBits//2)-100)) or (q >= (isqrt(2) << (pBits - 1))):
+            if (abs(p-q) > pow_fast(2, (pBits//2)-100)) or (q >= (isqrt(2) << (pBits - 1))):
                 if gcd(q-1, e) == 1:
                     candidate = miller_rabin(q, 5)
                     break

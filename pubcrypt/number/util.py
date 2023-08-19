@@ -136,7 +136,6 @@ def string_to_int(x, order="big"):
 def int_to_bin(n, iter="big"):
     result = ""
     
-    
     while n > 0:
         bit = n & 1  # Obtient le bit le plus à droite de n
         result += str(bit)

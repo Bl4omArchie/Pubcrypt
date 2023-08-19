@@ -16,7 +16,7 @@ class GraphVisualization:
         for _ in range(n):
             start = time.time()
             func(*args, **kwargs)
-            func_times.append("{:.10f}".format(time.time() - start))
+            func_times.append(time.time() - start)
         self.execution_times.append(func_times)
 
 
@@ -28,29 +28,15 @@ class GraphVisualization:
             raise ValueError("Invalid graph_type. Choose from 'lines' or 'scatter'")
 
         plt.figure(figsize=self.size)
-        for i, data in enumerate(self.execution_times):
+        for i in range(len(self.execution_times)):
+            data_chunck_size = len(self.execution_times[i])
             if graph_type == 'lines':
-                plt.plot(data, color=colors[i], label=labels[i])
-            elif graph_type == 'scatter':
-                plt.scatter(range(len(data)), data, color=colors[i], marker='o', label=f"{labels[i]} Points")
+                plt.plot(np.linspace(0, data_chunck_size, data_chunck_size), self.execution_times[i], color=colors[i], label=labels[i])
 
-            if show_stats:
-                mean = np.mean(data)
-                max_val = max(data)
-                min_val = min(data)
-                plt.text(len(data) - 1.5, mean, f"Mean: {mean:.2f}")
-                plt.text(len(data) - 1.5, max_val, f"Max: {max_val}")
-                plt.text(len(data) - 1.5, min_val, f"Min: {min_val}")
-
-            if show_regression:
-                x_vals = np.arange(len(data))
-                slope, intercept = np.polyfit(x_vals, data, 1)
-                regression_line = intercept + slope * x_vals
-                plt.plot(x_vals, regression_line, linestyle='dashed', color=colors[i])
 
         plt.title(self.title)
-        plt.xlabel("Nombre d'exécution")
-        plt.ylabel("Durée en seconde")
+        plt.xlabel('Test Iteration')
+        plt.ylabel('Elapsed Time (seconds)')
         plt.legend()
         plt.grid(True)
         plt.savefig(self.path+self.title)
