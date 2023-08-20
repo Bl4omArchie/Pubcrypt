@@ -13,7 +13,7 @@ class EffiencyProfile:
         self.func_name = str(func)
         self.profile_file = path + f"{self.func_name}" + sufix
 
-    def createe_profile(self, *args, **kwargs):
+    def create_profile(self, *args, **kwargs):
         profiler = cProfile.Profile()
         profiler.enable()
         self.func(*args, **kwargs)

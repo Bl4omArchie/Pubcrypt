@@ -7,10 +7,6 @@ def RBG(nBits):
     """ return a byte string of nBits"""
     return int_to_string(getrandbits(nBits), ceil(nBits/8))
 
-def RNG(nBits):
-    """ return an integer of nBits"""
-    return getrandbits(nBits)
-
 
 def invmod(z, a):
     if not z < a:
@@ -45,6 +41,13 @@ def gcd(x, y):
             y_rightmost >>= 1
 
     return x_rightmost
+
+def GCD(x,y):
+    """Greatest Common Denominator of :data:`x` and :data:`y`."""
+    x = abs(x) ; y = abs(y)
+    while x > 0:
+        x, y = y % x, x
+    return y
 
 
 def lcm(x, y):

@@ -1,7 +1,10 @@
-from pubcrypt.cryptosystem.rsa import generate, prime_recovery
-from pubcrypt.number.primality import get_prime_factor
+from pubcrypt.cryptosystem.rsa import *
+from pubcrypt.number.primality import *
+from pubcrypt.number.util import *
 from benchmark.plotting import *
 from benchmark.profiler import *
+
+import random, math, os
 
 
 """
@@ -18,13 +21,36 @@ There is two examples:
 
 def plotting_sample():
     obj = GraphVisualization("Function generate")
-    obj.measure_execution_time(150, generate, 2048)
+    obj.measure_execution_time(100, generate, 2048)
     obj.plot_data(["green"], ["generate()"], show_stats=True)
 
 def profile_sample():
-    obj = EffiencyProfile(get_prime_factor)
-    obj.create_profile(1024, 65537)
+    obj = EffiencyProfile(generate)
+    obj.create_profile(2048)
     obj.read_profile()
+
+def gcd_test():
+    n = 5000
+    obj = GraphVisualization("GCD comparison")
+    obj.measure_execution_time(n, gcd, random.randint(2**2048, 2**2049), random.randint(2**2048, 2**2049))
+    obj.measure_execution_time(n, math.gcd, random.randint(2**2048, 2**2049), random.randint(2**2048, 2**2049))
+    obj.plot_data(["green", "red"], ["gcd()", "GCD()"], show_stats=True)
+
+def pow_test():
+    n = 5000
+    obj = GraphVisualization("Fast exponentiation comparison")
+    obj.measure_execution_time(n, pow, random.randint(2**2048, 2**2049), random.randint(2**2048, 2**2049), random.randint(2**2048, 2**2049))
+    obj.measure_execution_time(n, pow_fast, random.randint(2**2048, 2**2049), random.randint(2**2048, 2**2049), random.randint(2**2048, 2**2049))
+    obj.plot_data(["green", "red"], ["pow()", "pow_fast()"], show_stats=True)
+
+def rng_test():
+    n = 1000
+    obj = GraphVisualization("RNG comparison")
+    obj.measure_execution_time(n, random.getrandbits, 2048)
+    obj.measure_execution_time(n, random.randint, 2**2048, 2**2049)
+    obj.measure_execution_time(n, random.randrange, 2**2048, 2**2049)
+    obj.measure_execution_time(n, os.urandom, 2048)
+    obj.plot_data(["green", "red", "blue", "purple"], ["getrandbits()", "randint()", "randrange()", "urandom()"], show_stats=False)
 
 if __name__ == "__main__":
     plotting_sample()

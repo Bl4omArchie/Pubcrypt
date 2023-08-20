@@ -4,7 +4,7 @@ import time
 
 
 class GraphVisualization:
-    def __init__(self, title, size=(10, 8)) -> None:
+    def __init__(self, title, size=(15, 13)) -> None:
         self.title = title
         self.size = size
         self.execution_times = []
@@ -37,9 +37,9 @@ class GraphVisualization:
                 min_value = np.min(self.execution_times[i])
                 max_value = np.max(self.execution_times[i])
                 mean_value = np.mean(self.execution_times[i])
-                plt.text(data_chunk_size, min_value, f"Min: {min_value:.2f}", verticalalignment='bottom', horizontalalignment='right')
-                plt.text(data_chunk_size, max_value, f"Max: {max_value:.2f}", verticalalignment='top', horizontalalignment='right')
-                plt.text(data_chunk_size, mean_value, f"Mean: {mean_value:.2f}", verticalalignment='top', horizontalalignment='right')
+                plt.text(data_chunk_size, min_value, f"Min: {min_value:.10f}", verticalalignment='top', horizontalalignment='left')
+                plt.text(data_chunk_size, max_value, f"Max: {max_value:.10f}", verticalalignment='top', horizontalalignment='right')
+                plt.text(data_chunk_size, mean_value, f"Mean: {mean_value:.10f}", verticalalignment='top', horizontalalignment='right')
 
         plt.title(self.title)
         plt.xlabel('Test Iteration')
