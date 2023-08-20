@@ -82,7 +82,6 @@ pubcrypt/number/util.py:
 | isqrt                  | x               | square root of x |
 | perfect_square         | c               | True if perfect square else False |
 | RBG                    | nBits           | a bit string of nBits          |
-| RNG                    | nBits           | an integer of nBits            |
 
 -----------------------------------------------------
 
