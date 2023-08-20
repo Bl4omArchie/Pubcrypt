@@ -79,8 +79,6 @@ def isqrt (x):
     q = 1
     while q <= x: 
         q <<= 2   # Equivalent to q *= 4, but using bitwise shift for better performance
-    while q <= x: 
-        q <<= 2   # Equivalent to q *= 4, but using bitwise shift for better performance
 
     z, r = x, 0
     while q > 1:
