@@ -1,22 +1,23 @@
-from pubcrypt.number.util import gcd, isqrt
-from pubcrypt.number.util import RNG, pow_mod
-from random import randint
+from pubcrypt.number.util import *
+from random import randrange, getrandbits
 
+
+round = 5
 
 def get_prime_factor(pBits, e):
-    """ Generate a prime factor """
+    """ Generate a prime factor """ 
     i = 0
     candidate = 0
 
     while candidate == 0:
-        while i<5*pBits:
-            p = RNG(pBits)
-            if p%2 == 0:
-                p += 1
+        while i < (5 * pBits):
+            p = getrandbits(pBits)
+            if p & 1 == 0:  #if the number is odd, add one
+                p |= 1 
 
-            if p >= isqrt(2)*(pow(2, pBits-1)):
+            if p >= (isqrt(2) << (pBits - 1)):
                 if gcd(p-1, e) == 1:
-                    candidate = miller_rabin(p, 5)
+                    candidate = miller_rabin(p, round)
                     break
             i += 1
 
@@ -24,13 +25,13 @@ def get_prime_factor(pBits, e):
     candidate = 0
     while candidate == 0:
         while i<5*pBits:
-            q = RNG(pBits)
-            if q%2 == 0:
-                q += 1
+            q = getrandbits(pBits)
+            if q & 1 == 0:
+                q |= 1
 
-            if (abs(p-q) > pow(2, pBits/2-100)) or q >= isqrt(2)*(pow(2, pBits-1)):
+            if (abs(p-q) > pow(2, (pBits//2)-100)) or (q >= (isqrt(2) << (pBits - 1))):
                 if gcd(q-1, e) == 1:
-                    candidate = miller_rabin(q, 5)
+                    candidate = miller_rabin(q, round)
                     break
             i += 1
     return p, q
@@ -38,12 +39,12 @@ def get_prime_factor(pBits, e):
 
 def miller_rabin(p, r):
     s, d = 0, p - 1
-    while d % 2 == 0:
+    while d & 1 == 0:
         d >>= 1
         s += 1
 
     for _ in range(r):
-        a = randint(2, p - 2)
+        a = randrange(2, p - 2)
         x = pow(a, d, p)
         if x == 1 or x == p - 1:
             continue

@@ -2,19 +2,18 @@
 
 This library aim to generate an RSA keypair in python. 
 Other features like encryption, decryption and prime_factor recovery are available. 
-I've started this project in the purpose of training myself to implemente cryptographic algorithm. In consequence, this library do NOT aim for a profesional purpose.
+I've started this project in the purpose of training myself to implemente cryptographic algorithm. In consequence, you shall not use it for real life purpose.
 
 
-## Table of contents
+Table of contents:
 - [Pubcrypt ~ RSA keypair](#pubcrypt--rsa-keypair)
-  - [Table of contents](#table-of-contents)
   - [Installation](#installation)
   - [Documentation](#documentation)
   - [Benchmark](#benchmark)
-  - [Features](#features)
-  - [Version](#version)
-  - [Author](#author)
-  - [References](#references)
+- [Features](#features)
+- [Version](#version)
+- [Author](#author)
+- [References](#references)
 
 ##  Installation
 
@@ -93,17 +92,22 @@ A more precise description is available below each function
 
 ## Benchmark
 
-Refactoring...
+This benchmark intend to evaluate the effiency of Pubcrypt's function
+With only two simples class: GraphVisualization and EffiencyProfile, I have access to a good overview of the performance.
 
-## Features
+- GraphVisualization allow me to generate a graph that plot the times of execution for one or severals function.
+- EffiencyProfile generate a profile with the library cProfile which is specialised in examining function in details. It give me information about witch modules are called in the function, how many I have been calling them and the final generation time.
+This evaluation is more accurated for huge function that used many external packages.
 
-Main product:
+Find two samples in the benchmark.py file.
+
+# Features
 - RSA keypair generator
 - RSA message encryption and decryption
 - RSA prime factors recovery
 
 
-## Version
+# Version
 
 | Version          | Description     |
 | :--------------: |:---------------:|
@@ -113,13 +117,13 @@ Main product:
 | v1.3             | correction of the get_prime_factor function |
 
 
-## Author
+# Author
 You can contact me and see my work here:
 - Blog: https://bl4omarchie.github.io/archX/
 - Discord server: https://discord.com/invite/D2wGP62
 - Twitter: https://twitter.com/Bl4om_Archie
 
-## References
+# References
  - [NIST FIPS 186-4: Digital Signature Standard (DSS)](https://nvlpubs.nist.gov/nistpubs/fips/nist.fips.186-4.pdf)
  - [NIST SP 800-56Br2: Recommendation for Pair-Wise Key Establishment Using Integer Factorization Cryptography](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Br2.pdf)
  - [PKCS #1 Version 2.2: RSA Cryptography Specifications draft-moriarty-pkcs1-01](https://datatracker.ietf.org/doc/pdf/draft-moriarty-pkcs1-01.pdf)

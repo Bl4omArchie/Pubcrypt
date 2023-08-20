@@ -7,10 +7,6 @@ def RBG(nBits):
     """ return a byte string of nBits"""
     return int_to_string(getrandbits(nBits), ceil(nBits/8))
 
-def RNG(nBits):
-    """ return an integer of nBits"""
-    return getrandbits(nBits)
-
 
 def invmod(z, a):
     if not z < a:
@@ -19,58 +15,81 @@ def invmod(z, a):
     i, j = a, z
     y1, y2 = 1, 0
 
-    while True:
-        q = i//j
-        r = i - (j*q)
-        y = y2 - (y1*q)
+    while j > 0:
+        q = i // j
+        r = i - (j * q)
+        y = y2 - (y1 * q)
         i, j = j, r
-        y2, y1 = y1,y
+        y2, y1 = y1, y
 
-        if j>0:
-            continue
-
-        else:
-            break
-
-    return y2%a
+    return y2 % a
 
 
 def gcd(x, y):
-    r = [x, y]
-    i = 1
-    while r[i] >= 0:
-        i += 1
-        r.append(r[i-2] % r[i-1])
+    if x == 0:
+        return y
+    if y == 0:
+        return x
 
-        if r[i] == 0:
-            return r[i-1]
+    x_rightmost = x & -x
+    y_rightmost = y & -y
+
+    while x_rightmost != y_rightmost:
+        if x_rightmost > y_rightmost:
+            x_rightmost >>= 1
+        else:
+            y_rightmost >>= 1
+
+    return x_rightmost
+
+def GCD(x,y):
+    """Greatest Common Denominator of :data:`x` and :data:`y`."""
+    x = abs(x) ; y = abs(y)
+    while x > 0:
+        x, y = y % x, x
+    return y
+
 
 def lcm(x, y):
     return (x*y) // gcd(x, y)
 
 
-def pow_mod(x, y, z):
-    number = 1
-    while y:
-        if y & 1:
-            number = number * x % z
-        y >>= 1
-        x = x * x % z
-    return number
+def pow_fast(b, e, m=None):
+    result = 1
+    while e > 0:
+        if e & 1:
+            result *= b
+            if m:
+                result %= m
+        b *= b
+        if m:
+            b %= m
+        e >>= 1
+
+        if b == 0 and m:
+            b = 1  
+        if m == 0:
+            m = 1 
+    if m:
+        result %= m
+    return result
+
 
 def isqrt (x):
-    """ Credit: https://rosettacode.org/wiki/Isqrt_(integer_square_root)_of_X#Python """
     q = 1
-    while q <= x : 
-        q *= 4
+    while q <= x: 
+        q <<= 2   # Equivalent to q *= 4, but using bitwise shift for better performance
+    while q <= x: 
+        q <<= 2   # Equivalent to q *= 4, but using bitwise shift for better performance
 
     z, r = x, 0
-    while q > 1 :
-        q //= 4
-        t, r = z-r-q, r//2
-        if t >= 0 :
-            z, r = t, r+q
-    return r 
+    while q > 1:
+        q >>= 2   # Equivalent to q //= 4, but using bitwise shift for better performance
+        t, r = z - r - q, r >> 1   # Equivalent to r //= 2, but using bitwise shift for better performance
+        if t >= 0:
+            z, r = t, r + q
+    return r
+
 
 def perfect_square(c):
     n = floor(log2(abs(c))) + 1
@@ -124,14 +143,17 @@ def string_to_int(x, order="big"):
 
 def int_to_bin(n, iter="big"):
     result = ""
+    
     while n > 0:
-        if n%2 == 0:
-            result += "0"
-        else:
-            result += "1"
-        n = n //2
-        
+        bit = n & 1  # Obtient le bit le plus à droite de n
+        result += str(bit)
+        n = n >> 1   # Décalage de n vers la droite d'une position (équivalent à n // 2)
+
+        bit = n & 1  # Obtient le bit le plus à droite de n
+        result += str(bit)
+        n = n >> 1   # Décalage de n vers la droite d'une position (équivalent à n // 2)
+
     if iter == "little":
-        return result
+        return result[::-1][::-1]
     else:
         return result[::-1]
