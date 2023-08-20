@@ -114,7 +114,7 @@ Find two samples in the benchmark.py file.
 | v1.1             | command line version added        |
 | v1.2             | miller-rabin improvement that allow to generate key pairs faster      |
 | v1.3             | correction of the get_prime_factor function |
-
+| v1.4             | proper versionn with good performance + benchmark |
 
 # Author
 You can contact me and see my work here:
