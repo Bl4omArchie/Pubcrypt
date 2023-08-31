@@ -48,27 +48,27 @@ pubcrypt/cryptosystem/rsa.py
 | primitive_exp          | m, exp, n       |   plaintext or ciphertext  |
 | prime_recovery         | n, e, d         |    p, q |
 
-```
-nBits = the size in bits of your key [2048, 8192] <br>
-n = public modulus <br>
-e = public exponent <br>
-d = private exponent <br>
-exp = public or private exponent <br>
-p, q = first and second primeArithmetic algorithm: gcd, lcm, sqrt, fast_exponentiation, 
- factor <br>
-``` 
+------------------------------------------
+
+pubcrypt/cryptosystem/rsa_gmp.py
+| functions              | Parameters      | Return             |
+| :--------------:       |:---------------:| :-----------------:|
+| generate_gmp               | nBits, e=65537  |  public and private keypair: n, e, d   |
 
 ------------------------------------------
 
 pubcrypt/number/primality.py:
 | functions              | Parameters      | Return             |
 | :--------------:       |:---------------:| :-----------------:|
+| get_prime_factors_gmp      | pBits, e, state        |  prime factor p and q         |
+
+----------------------------------------
+
+pubcrypt/number/primality.py:
+| functions              | Parameters      | Return             |
+| :--------------:       |:---------------:| :-----------------:|
 | get_prime_factors      | pBits, e        |  prime factor p and q         |
 | miller_rabin           | p, r            | PRIME or NOT_PRIME |
-
-``` 
-r = number of round for Miller Rabin primality test. Set to 5
-``` 
 
 ----------------------------------------
 
@@ -105,6 +105,10 @@ Find two samples in the benchmark.py file.
 - RSA message encryption and decryption
 - RSA prime factors recovery
 
+- RSA_GMP keypair generator
+- RSA_GMP get_prime_factor
+- RSA_GMP miller-rabin
+
 
 # Version
 
@@ -115,6 +119,7 @@ Find two samples in the benchmark.py file.
 | v1.2             | miller-rabin improvement that allow to generate key pairs faster      |
 | v1.3             | correction of the get_prime_factor function |
 | v1.4             | proper versionn with good performance + benchmark |
+| v1.5             | new feature: RSA_GMP. Arithemic operations are handled by gmpy2 |
 
 # Author
 You can contact me and see my work here:
@@ -127,3 +132,4 @@ You can contact me and see my work here:
  - [NIST SP 800-56Br2: Recommendation for Pair-Wise Key Establishment Using Integer Factorization Cryptography](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Br2.pdf)
  - [PKCS #1 Version 2.2: RSA Cryptography Specifications draft-moriarty-pkcs1-01](https://datatracker.ietf.org/doc/pdf/draft-moriarty-pkcs1-01.pdf)
  - [RosettaCode](https://rosettacode.org/wiki/Rosetta_Code)
+ - [gmpy2 documentation](https://gmpy2.readthedocs.io/en/latest/intro.html)

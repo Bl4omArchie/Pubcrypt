@@ -1,3 +1,4 @@
+from pubcrypt.cryptosystem.rsa_GMP import *
 from pubcrypt.cryptosystem.rsa import *
 from pubcrypt.number.primality import *
 from pubcrypt.number.util import *
@@ -52,5 +53,11 @@ def rng_test():
     obj.measure_execution_time(n, os.urandom, 2048)
     obj.plot_data(["green", "red", "blue", "purple"], ["getrandbits()", "randint()", "randrange()", "urandom()"], show_stats=False)
 
+def rsa_GMP_test():
+    n = 100
+    obj = GraphVisualization("RSA GMP generate function")
+    obj.measure_execution_time(n, generate_gmp, 4096)
+    obj.plot_data(["green"], ["generate_gmp()"], show_stats=True)
+
 if __name__ == "__main__":
-    plotting_sample()
+    rsa_GMP_test()
