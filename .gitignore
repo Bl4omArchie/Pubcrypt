@@ -24,4 +24,4 @@ share/python-wheels/
 MANIFEST
 
 # Profiles
-./benchmark/profiles/*.ep
+benchmark/profiles/*.ep
