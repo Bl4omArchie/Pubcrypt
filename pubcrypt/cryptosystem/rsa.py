@@ -7,7 +7,7 @@ def generate(nBits, e=65537):
     if nBits < 2048:
         raise ValueError(("Incorrect key length. nBits must be equal or greater than 2048"))
     
-    elif e%2 == 0 or not pow(2, 16) <= e <= pow(2, 256):
+    elif e%2 == 0 or not pow_fast(2, 16) <= e <= pow_fast(2, 256):
         raise ValueError("Incorrect puclic exponent. e must be odd and in the range [2^16, 2^256]")
     pBits = nBits//2
     
@@ -23,10 +23,22 @@ def generate(nBits, e=65537):
 def primitive_exp(m, exp, n):
     """ This function represent the encryption/decryption/signature operation """
     if 0 < m < n-1:
-        return pow(m, exp, n)
+        return pow_fast(m, exp, n)
 
     else:
         raise ValueError("Data representative out of range")
+
+
+def crt_decrypt(ciphertext, n, e, d):
+    p, q = prime_recovery(n, e, d)
+    dp = d % (p - 1)
+    dq = d % (q - 1)
+    q_inv = invmod(q, p)
+    m1 = pow_fast(ciphertext, dp, p)
+    m2 = pow_fast(ciphertext, dq, q)
+
+    h = (q_inv * (m1 - m2)) % p
+    return m2 + h * q   #return plaintext
 
 
 def prime_recovery(n, e, d):
@@ -36,10 +48,10 @@ def prime_recovery(n, e, d):
     r = a - m * n
     b = (n - r) // (m + 1) + 1
 
-    if pow(b, 2) <= (n << 2):
+    if pow_fast(b, 2) <= (n << 2):
         raise ValueError("Error")
 
-    y = isqrt(pow(b, 2) - (n << 2))
+    y = isqrt(pow_fast(b, 2) - (n << 2))
     return (b + y) >> 1, (b - y) >> 1
 
 

@@ -31,20 +31,23 @@ def profile_sample():
     obj.read_profile()
 
 def gcd_test():
+    #Comparison between my implementation of gcd and python's built-in function
     n = 5000
     obj = GraphVisualization("GCD comparison")
     obj.measure_execution_time(n, gcd, random.randint(2**2048, 2**2049), random.randint(2**2048, 2**2049))
     obj.measure_execution_time(n, math.gcd, random.randint(2**2048, 2**2049), random.randint(2**2048, 2**2049))
-    obj.plot_data(["green", "red"], ["gcd()", "GCD()"], show_stats=True)
+    obj.plot_data(["green", "red"], ["gcd()", "python gcd()"], show_stats=True)
 
 def pow_test():
-    n = 5000
+    #Comparison between my implementation of fast exponentiation (pow_fast) and python's built-in function
+    n = 1000
     obj = GraphVisualization("Fast exponentiation comparison")
     obj.measure_execution_time(n, pow, random.randint(2**2048, 2**2049), random.randint(2**2048, 2**2049), random.randint(2**2048, 2**2049))
     obj.measure_execution_time(n, pow_fast, random.randint(2**2048, 2**2049), random.randint(2**2048, 2**2049), random.randint(2**2048, 2**2049))
-    obj.plot_data(["green", "red"], ["pow()", "pow_fast()"], show_stats=True)
+    obj.plot_data(["green", "red"], ["python pow()", "pow_fast()"], show_stats=True)
 
 def rng_test():
+    #Comparison between different way of generating a random number
     n = 1000
     obj = GraphVisualization("RNG comparison")
     obj.measure_execution_time(n, random.getrandbits, 2048)
@@ -59,5 +62,14 @@ def rsa_GMP_test():
     obj.measure_execution_time(n, generate_gmp, 4096)
     obj.plot_data(["green"], ["generate_gmp()"], show_stats=True)
 
+def decryption_using_crt():
+    n = 250
+    N, e, d = generate(2048)
+    obj = GraphVisualization("CRT and primitive decryption")
+    obj.measure_execution_time(n, crt_decrypt, random.randint(2**255, 2**256), N, e, d)
+    obj.measure_execution_time(n, primitive_exp, random.randint(2**255, 2**256), d, N)
+    obj.plot_data(["green", "red"], ["crt_decryption()", "decryption()"], show_stats=True)
+
+
 if __name__ == "__main__":
-    rsa_GMP_test()
+    pow_test()
