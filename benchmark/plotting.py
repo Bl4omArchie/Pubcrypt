@@ -12,12 +12,25 @@ class GraphVisualization:
 
 
     def measure_execution_time(self, n, func, *args, **kwargs):
+        #measure the time for each execution of the function
         func_times = []
         for _ in range(n):
             start = time.time()
             func(*args, **kwargs)
             func_times.append(time.time() - start)
         self.execution_times.append(func_times)
+
+    def measure_several_execution_time(self, func, *args, **kwargs):
+        #measure the time for executing n times the function
+        func_times = []
+        samples = [1, 5, 10, 15, 20, 25, 30, 50]
+
+        for number in samples:
+            start = time.time()
+            for _ in range(number):
+                func(*args, **kwargs)
+            func_times.append(time.time() - start)
+            self.execution_times.append(func_times)
 
 
     def plot_data(self, colors, labels, graph_type='lines', show_stats=False):

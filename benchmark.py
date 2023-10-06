@@ -70,6 +70,11 @@ def decryption_using_crt():
     obj.measure_execution_time(n, primitive_exp, random.randint(2**255, 2**256), d, N)
     obj.plot_data(["green", "red"], ["crt_decryption()", "decryption()"], show_stats=True)
 
+def rsa_parallel_generation():
+    n = 50
+    obj = GraphVisualization("Single process VS multi-process")
+    obj.measure_several_execution_time(generate, 2048)
+    obj.plot_data(["green"], ["generate()"], show_stats=True)
 
 if __name__ == "__main__":
-    pow_test()
+    rsa_parallel_generation()

@@ -1,4 +1,4 @@
-from pubcrypt.number.primality import get_prime_factor
+from pubcrypt.number.primality import get_prime_factors
 from pubcrypt.number.util import *
 from random import randrange
 
@@ -11,7 +11,7 @@ def generate(nBits, e=65537):
         raise ValueError("Incorrect puclic exponent. e must be odd and in the range [2^16, 2^256]")
     pBits = nBits//2
     
-    p, q = get_prime_factor(pBits, e) 
+    p, q = get_prime_factors(pBits, e) 
     d = invmod(e, lcm(p-1, q-1))
     n = p*q
 
