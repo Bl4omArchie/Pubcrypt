@@ -1,3 +1,5 @@
+from pubcrypt.parallel.rsa_thread import generate_multi_keypair
+
 from pubcrypt.cryptosystem.rsa_GMP import *
 from pubcrypt.cryptosystem.rsa import *
 from pubcrypt.number.primality import *
@@ -72,9 +74,10 @@ def decryption_using_crt():
 
 def rsa_parallel_generation():
     n = 50
-    obj = GraphVisualization("Single process VS multi-process")
+    obj = GraphVisualization("Single process VS multi-process", x="8 times N execution (n=1, n=5 ... n=50")
     obj.measure_several_execution_time(generate, 2048)
-    obj.plot_data(["green"], ["generate()"], show_stats=True)
+    obj.measure_several_execution_time(generate_multi_keypair, 2048)
+    obj.plot_data(["green"], ["generate()"], graph_type="scatter", show_stats=False)
 
 if __name__ == "__main__":
     rsa_parallel_generation()

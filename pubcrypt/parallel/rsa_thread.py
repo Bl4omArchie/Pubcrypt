@@ -4,7 +4,7 @@ from pubcrypt.number.primality import *
 import concurrent.futures
 
 
-def generate_key_pair(nBits, e=65537):
+def generate_key_pairs(nBits, e=65537):
     if nBits < 2048:
         raise ValueError("Incorrect key length. nBits must be equal or greater than 2048")
     
@@ -21,12 +21,17 @@ def generate_key_pair(nBits, e=65537):
     
     return n, e, d
 
-def generate_multi_keypair(num_pairs, nBits, e=65537):
+def generate_multi_keypair(num_keys, num_proc, nBits, e=65537):
+    Queue = []
     key_pairs = []
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        for _ in range(num_pairs):
-            key_pair = executor.submit(generate_key_pair, nBits, e)
-            key_pairs.append(key_pair.result())
+        while len(key_pairs) < num_keys:
+            for _ in range(num_proc):
+                Queue.append(executor.submit(generate_key_pairs, nBits, e))
+
+            for proc in Queue:
+                key_pairs.append(proc.result())
+                Queue.remove(proc)
 
     return key_pairs

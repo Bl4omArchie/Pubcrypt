@@ -1,5 +1,5 @@
 from pubcrypt.cryptosystem.rsa import generate
-from pubcrypt.cryptosystem.rsa_parallel import generate_multi_keypair
+from pubcrypt.parallel.rsa_thread import generate_multi_keypair
 from pubcrypt.scheme.oaep import *
 
 
@@ -14,10 +14,11 @@ def oaep_test():
 
 
 def parallel_test():
-    num_pairs = 10
+    num_keys = 100
+    num_proc = 2
     nBits = 2048   
 
-    key_pairs = generate_multi_keypair(num_pairs, nBits)
+    key_pairs = generate_multi_keypair(num_keys, num_proc, nBits)
     for i, (n, e, d) in enumerate(key_pairs, start=1):
         print(f"Key Pair {i} - n: {n}, e: {e}, d: {d}")
 
