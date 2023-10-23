@@ -72,4 +72,4 @@ def decryption_using_crt():
 
 
 if __name__ == "__main__":
-    pow_test()
+    gcd_test()
