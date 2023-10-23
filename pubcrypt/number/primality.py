@@ -4,7 +4,7 @@ from random import randrange, getrandbits
 
 round = 5
 
-def get_prime_factor(pBits, e):
+def get_prime_factors(pBits, e):
     """ Generate a prime factor """ 
     i = 0
     candidate = 0
