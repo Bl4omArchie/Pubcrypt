@@ -38,7 +38,7 @@ def crt_decrypt(ciphertext, n, e, d):
     m2 = pow_fast(ciphertext, dq, q)
 
     h = (q_inv * (m1 - m2)) % p
-    return m2 + h * q   #return plaintext
+    return m2 + h * q  
 
 
 def prime_recovery(n, e, d):

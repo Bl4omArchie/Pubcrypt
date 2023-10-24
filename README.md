@@ -10,6 +10,7 @@ Table of contents:
   - [Installation](#installation)
   - [Documentation](#documentation)
   - [Benchmark](#benchmark)
+  - [Parallel version](#parallel-version)
 - [Features](#features)
 - [Version](#version)
 - [Author](#author)
@@ -100,6 +101,10 @@ This evaluation is more accurated for huge function that used many external pack
 
 Find two samples in the benchmark.py file.
 
+## Parallel version
+
+The purpose of this is to create an optimized parallel algorithm that generate RSA key pairs.  
+
 # Features
 - RSA keypair generator
 - RSA message encryption and decryption
@@ -108,7 +113,6 @@ Find two samples in the benchmark.py file.
 - RSA_GMP keypair generator
 - RSA_GMP get_prime_factor
 - RSA_GMP miller-rabin
-
 
 # Version
 
