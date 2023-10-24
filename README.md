@@ -11,6 +11,7 @@ Table of contents:
   - [Documentation](#documentation)
   - [Benchmark](#benchmark)
 - [Features](#features)
+  - [RSA GMP](#rsa-gmp)
 - [Version](#version)
 - [Author](#author)
 - [References](#references)
@@ -109,6 +110,13 @@ Find two samples in the benchmark.py file.
 - RSA_GMP get_prime_factor
 - RSA_GMP miller-rabin
 
+## RSA GMP
+
+As I started implementing RSA cryptosystem in C with the GMP library, I was curious to see how much the python GMP library could be faster than mine.
+So I implemented another RSA key pairs generator but with the gmpy2 module that you can find in both file: rsa_GMP.py and primality_GMP.py
+A graph for the generation of 100 keys with this algorithm is available in the benchmark/graph folder named "RSA GMP generate function".**
+The outcome is surrounding: my implementation is, from far, slower ! The python GMP implementation burst everything with a maximal generating time of 2.5 seconds. Still we can notice that the average time is 2.3 seconds while Pubcrypt is 2.4 seconds. 
+As a conclusion GMP is more stable than my implementation but not "faster" because the minimal generating time is around 2.2 seconds while pubcrypt go down under the second (0.24s).  
 
 # Version
 
