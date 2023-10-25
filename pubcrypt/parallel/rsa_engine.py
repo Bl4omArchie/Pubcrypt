@@ -1,8 +1,9 @@
 from pubcrypt.number.primality import get_prime_factors
 from pubcrypt.parallel.clock import Clock
-
 from pubcrypt.number.util import *
+
 from multiprocessing import Process
+import queue, threading
 
 
 """
@@ -35,25 +36,19 @@ def store_key():
         pass
 
 
-def keypairs_engine(time: tuple, pub_exp: int, nBits: int):
-    if nBits < 2048:
-        raise ValueError(("Incorrect key length. nBits must be equal or greater than 2048"))
-    
-    elif pub_exp%2 == 0 or not pow_fast(2, 16) <= pub_exp <= pow_fast(2, 256):
-        raise ValueError("Incorrect puclic exponent. e must be odd and in the range [2^16, 2^256]")
-    pBits = nBits//2
+class Parallel_KeyGeneration_Engine:
+    def __init__(self, pub_exp: int, nBits: int) -> None:
+        if nBits < 2048:
+            raise ValueError(("Incorrect key length. nBits must be equal or greater than 2048"))
+        
+        elif pub_exp%2 == 0 or not pow_fast(2, 16) <= pub_exp <= pow_fast(2, 256):
+            raise ValueError("Incorrect puclic exponent. e must be odd and in the range [2^16, 2^256]")
+        
+        self.pBits = nBits//2
+        self.keypair_waiting_list = queue.Queue()
+        self.proc_list = []
 
-    #start clock
-    clock = Clock(time)
-    clock.start()
-
-    #start generating prime factors
-    processus = []
-    for _ in range(NUM_PROC):
-        processus.append(Process(target=get_prime_factors, args=(pBits, pub_exp)))
-
-    #start construct key pairs
-    construct_key_pairs()
-
-    # start wrapping keys
-    store_key()
+    def start(self, time: tuple):
+        #start clock
+        clock = Clock(time)
+        clock.start()
