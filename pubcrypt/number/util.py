@@ -31,16 +31,20 @@ def gcd(x, y):
     if y == 0:
         return x
 
-    x_rightmost = x & -x
-    y_rightmost = y & -y
+    x_z = (x & -x).bit_length()-1
+    y_z = (y & -y).bit_length()-1
+    shift = min(x_z, y_z)
+    y_z >>= y_z
 
-    while x_rightmost != y_rightmost:
-        if x_rightmost > y_rightmost:
-            x_rightmost >>= 1
-        else:
-            y_rightmost >>= 1
+    while x != 0:
+        x >>= x_z
+        diff = y-x
+        x_z = (diff & -diff).bit_length()-1
+        y = min(x, y)
+        x = abs(diff)
 
-    return x_rightmost
+    return y << shift
+
 
 def GCD(x,y):
     """Greatest Common Denominator of :data:`x` and :data:`y`."""
