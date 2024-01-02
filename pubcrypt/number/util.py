@@ -8,21 +8,21 @@ def RBG(nBits):
     return int_to_string(getrandbits(nBits), ceil(nBits/8))
 
 
-def invmod(z, a):
-    if not z < a:
-        z, a = a, z
+def invmod  (u, v):
+    if not u < v:
+        u, v = v, u
 
-    i, j = a, z
-    y1, y2 = 1, 0
-
-    while j > 0:
-        q = i // j
-        r = i - (j * q)
-        y = y2 - (y1 * q)
-        i, j = j, r
-        y2, y1 = y1, y
-
-    return y2 % a
+    u3, v3 = u, v
+    u1, v1 = 1, 0
+    while v3 > 0:
+        q = u3 // v3
+        u1, v1 = v1, u1 - v1*q
+        u3, v3 = v3, u3 - v3*q
+    if u3 != 1:
+        raise ValueError("No inverse value can be computed")
+    while u1<0:
+        u1 = u1 + v
+    return u1
 
 
 def gcd(x, y):
@@ -58,25 +58,15 @@ def lcm(x, y):
     return (x*y) // gcd(x, y)
 
 
-def pow_fast(b, e, m=None):
+def fast_exp_mod(b, e, m):
     result = 1
+    b %= m  
     while e > 0:
         if e & 1:
-            result *= b
-            if m:
-                result %= m
-        b *= b
-        if m:
-            b %= m
+            result = (result * b) % m
+        b = (b * b) % m
         e >>= 1
-
-        if b == 0 and m:
-            b = 1  
-        if m == 0:
-            m = 1 
-    if m:
-        result %= m
-    return result
+    return result % m
 
 
 def isqrt (x):
@@ -100,7 +90,6 @@ def perfect_square(c):
 
     while True:
         x = (pow(x, 2)+c)/(2*x)
-
         if pow(x, 2) < pow(2, m)+c:
             break
 
