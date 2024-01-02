@@ -17,19 +17,12 @@ With only two simples class: GraphVisualization and EffiencyProfile, I have acce
 This evaluation is more accurated for huge function that used many external packages.
 """
 
-
-def plotting_sample():
+def generate_bench():
+    n = 10
+    key_size = 2048
     obj = GraphVisualization("Function generate")
-    obj.measure_execution_time(100, generate, 2048)
+    obj.measure_execution_time(n, generate, key_size)
     obj.plot_data(["green"], ["generate()"], show_stats=True)
-
-def profile_sample():
-    obj = EffiencyProfile(generate)
-    obj.create_profile(2048)
-    obj.read_profile()
-
-
-#Here start all the test generated in benchmark/graph
 
 def gcd_bench():
     #Comparison between my implementation of gcd and python's built-in function
@@ -87,4 +80,4 @@ def invmod_bench():
 
 
 if __name__ == "__main__":
-    rng_bench()
+    generate_bench()

@@ -15,16 +15,17 @@ def generate(nBits, e=65537):
     d = invmod(e, lcm(p-1, q-1))
     n = p*q
 
-    if pair_wise_consistency_test(n, e, d) == 0:
-        raise ValueError("Error, please retry. Consistency test failed")
+    #perform a consistency test to insure the validity of the key
+    m = 0x1e29b0d770e07177581a3ff4f882b1d4cbfe4fcec4f1646aec09a0fa9ba8b67fe1690c27
+    if m != fast_exp_mod(m, e*d, n):
+        raise ValueError("[!] Error, please retry. Consistency test failed")
+    
     return n, e, d
 
 
 def primitive_exp(m, exp, n):
-    """ This function represent the encryption/decryption/signature operation """
     if 0 < m < n-1:
         return fast_exp_mod(m, exp, n)
-
     else:
         raise ValueError("Data representative out of range")
 
@@ -48,15 +49,8 @@ def prime_recovery(n, e, d):
     r = a - m * n
     b = (n - r) // (m + 1) + 1
 
-    if fast_exp(b, 2) <= (n << 2):
+    if b**2 <= (n << 2):
         raise ValueError("Error")
 
-    y = isqrt(fast_exp(b, 2) - (n << 2))
+    y = isqrt(b**2 - (n << 2))
     return (b + y) >> 1, (b - y) >> 1
-
-
-
-def pair_wise_consistency_test(n, e, d):
-    """ Check if the generated keypair can encrypt and decrypt correctly a plaintext m """
-    m = randrange(1, n//2)
-    return m == primitive_exp(m, e*d, n)
