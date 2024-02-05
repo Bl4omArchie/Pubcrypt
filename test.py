@@ -1,5 +1,7 @@
 from test import test_cryptosystem
+from test import test_arithmetic
 
 
 if __name__ == "__main__":
-    test_cryptosystem.test_key_generation()
+    test_arithmetic.test_gcd()
+    test_arithmetic.test_fast_exp_mod()

@@ -72,11 +72,11 @@ def fast_exp_mod(b, e, m):
 def isqrt (x):
     q = 1
     while q <= x: 
-        q <<= 2   # Equivalent to q *= 4, but using bitwise shift for better performance
+        q <<= 2                    # Equivalent to q *= 4, but using bitwise shift for better performance
 
     z, r = x, 0
     while q > 1:
-        q >>= 2   # Equivalent to q //= 4, but using bitwise shift for better performance
+        q >>= 2                    # Equivalent to q //= 4, but using bitwise shift for better performance
         t, r = z - r - q, r >> 1   # Equivalent to r //= 2, but using bitwise shift for better performance
         if t >= 0:
             z, r = t, r + q
