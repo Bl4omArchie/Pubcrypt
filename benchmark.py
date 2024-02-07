@@ -79,5 +79,13 @@ def invmod_bench():
     obj.plot_data(["green", "red"], ["invmod()", "number.invmod()"], show_stats=True)
 
 
+def karatsuba_bench():
+    n = 500
+    obj = GraphVisualization("Karatsuba multiplication")
+    obj.measure_execution_time(n, karatsuba, random.randint(2**1023, 2**1024), random.randint(2**1024, 2**2048))
+    obj.measure_execution_time(n, karatsuba2, random.randint(2**1023, 2**1024), random.randint(2**1024, 2**2048))
+    obj.plot_data(["green", "red"], ["karatsuba()", "karatsuba2()"], show_stats=True)
+
+
 if __name__ == "__main__":
-    generate_bench()
+    karatsuba_bench()

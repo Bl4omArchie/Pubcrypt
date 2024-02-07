@@ -117,6 +117,53 @@ def int_to_string(x, xLen, order="big"):
     return bytes(result)
 
 
+def get_length(num):
+    length = 0
+    while num:
+        length += 1
+        num >>= 1
+    return length
+
+# Using bit wise operators clearly improve performance. See graph in benchmark/graph/
+def karatsuba(x,y):
+    if x < 10 and y < 10:
+        return x*y
+
+    n = max(get_length(x), get_length(y))
+    m = (n + 1) >> 1
+
+    x_H = x >> m
+    x_L = x & ((1 << m)-1)
+
+    y_H = y >> m
+    y_L = y & ((1 << m)-1)
+
+    a = karatsuba(x_H, y_H)
+    d = karatsuba(x_L, y_L)
+    e = karatsuba((x_H + x_L), (y_H + y_L)) - a - d
+
+    return (a << (m << 1)) + ((e << m) + d)
+
+def karatsuba2(x,y):
+    if x < 10 and y < 10:
+        return x*y
+
+    n = max(len(str(x)), len(str(y)))
+    m = ceil(n/2)   #Cast n into a float because n might lie outside the representable range of integers.
+
+    x_H  = floor(x / pow(10, m))
+    x_L = x % pow(10, m)
+
+    y_H = floor(y / pow(10, m))
+    y_L = y % pow(10, m)
+
+    a = karatsuba2(x_H,y_H)
+    d = karatsuba2(x_L,y_L)
+    e = karatsuba2(x_H + x_L, y_H + y_L) - a - d
+
+    return int(a*pow(10, m*2) + e*pow(10, m) + d)
+
+
 def string_to_int(x, order="big"):
     """
     Converts an octet string (bytes) to a integer

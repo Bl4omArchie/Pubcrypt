@@ -18,13 +18,25 @@ def test_gcd():
     print ("[*] TEST: 100% passed")
 
 def test_invmod():
-    num_iter = 1000
+    num_iter = 10000
 
     try:
         for _ in range(num_iter):
             a = randint(pow(2, 127), pow(2, 128))
             b = randint(pow(2, 127), pow(2, 128))
             assert(pow(a, -1, b) == util.invmod(a, b))
+    except:
+        raise (f"[!] FAILURE at num_iter = {num_iter}: a = {a}, b = {b}")
+    print ("[*] TEST: 100% passed")
+
+def test_karatsuba():
+    num_iter = 500
+
+    try:
+        for _ in range(num_iter):
+            a = randint(pow(2, 127), pow(2, 128))
+            b = randint(pow(2, 127), pow(2, 128))
+            assert(a*b == util.karatsuba(a, b))
     except:
         raise (f"[!] FAILURE at num_iter = {num_iter}: a = {a}, b = {b}")
     print ("[*] TEST: 100% passed")
