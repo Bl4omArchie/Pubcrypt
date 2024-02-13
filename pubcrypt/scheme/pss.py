@@ -44,7 +44,7 @@ def mgf(seed, mask_len, hash_function=hashlib.sha256):
         t += hash_function(seed + c).digest()
     return t[:mask_len]
 
-
+"""
 def signature_pritimive(m, d, n):
     # Check if m is in the range [0, n-1]
     n = K[0] if len(K) == 2 else K[0] * K[1]  # n is the product of p and q if the second form is used
@@ -75,11 +75,12 @@ def signature_pritimive(m, d, n):
             s = s2 + q * h
 
     return s
+"""
 
 
 
 def signature_generation(m, d, n, nBits):
     em = pss_encode(m, nBits-1)
     m = string_to_int(em)
-    s = signature_pritimive(m, d, n)
-    return int_to_string(s)
+    #s = signature_pritimive(m, d, n)
+    #return int_to_string(s)

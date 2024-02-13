@@ -1,6 +1,5 @@
 from pubcrypt.number.primality import get_prime_factor
 from pubcrypt.number.util import *
-from random import randrange
 
 
 def generate(nBits, e=65537):
@@ -39,7 +38,7 @@ def crt_decrypt(ciphertext, n, e, d):
     m2 = fast_exp_mod(ciphertext, dq, q)
 
     h = (q_inv * (m1 - m2)) % p
-    return m2 + h * q   #return plaintext
+    return m2 + h * q
 
 
 def prime_recovery(n, e, d):

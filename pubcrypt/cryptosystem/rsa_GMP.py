@@ -1,5 +1,5 @@
-import gmpy2, os, random
-from gmpy2 import mpz, isqrt, gcd, powmod, random_state, lcm
+import random, os
+from gmpy2 import isqrt, gcd, powmod, random_state, lcm
 from pubcrypt.number.primality_GMP import get_prime_factor
 
 
@@ -18,8 +18,9 @@ def generate_gmp(nBits, e=65537):
     d = powmod(e, -1, lcm(p - 1, q - 1))
     n = p * q
 
-    if pair_wise_consistency_test(n, e, d, state) == 0:
-        raise ValueError("Error, please retry. Consistency test failed")
+    m = 0x1e29b0d770e07177581a3ff4f882b1d4cbfe4fcec4f1646aec09a0fa9ba8b67fe1690c27
+    if m != powmod(m, e*d, n):
+        raise ValueError("[!] Error, please retry. Consistency test failed")
     return n, e, d
 
 
@@ -43,9 +44,3 @@ def prime_recovery(n, e, d):
 
     y = isqrt(pow(b, 2) - (n << 2))
     return (b + y) >> 1, (b - y) >> 1
-
-
-def pair_wise_consistency_test(n, e, d, state):
-    """ Check if the generated keypair can encrypt and decrypt correctly a plaintext m """
-    m = gmpy2.mpz_random(state, n // 2) + 1
-    return m == primitive_exp(m, e * d, n)
