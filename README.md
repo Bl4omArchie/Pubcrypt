@@ -1,69 +1,47 @@
 # Pubcrypt ~ RSA keypair generation
 
-Pubcrypt is python library that aim to implement self-made cryptographic algorithms.
-I first started this project for training myself with NIST's publication.
-Actually Pubcrypt perform RSA keypairs generation, encryption, decryption, key recovery and more.
-
-I'm looking to make this project open-source so everyone can contribute and implement more features. 
+Pubcrypt is a personnal project that aim to implement in python public key cryptography. I'm doing this to train my coding skills and learn good programming practise.
+See this repo as an experiment, I'm not aiming to make the "perfect" and most optmized implementation. I'm testing various algorithm and evaluating their efficiency (see benchmark folder). 
 
 
 Table of contents:
 - [Pubcrypt ~ RSA keypair generation](#pubcrypt--rsa-keypair-generation)
-- [Tutorial](#tutorial)
-  - [Installation](#installation)
-  - [Command line](#command-line)
 - [Roadmap](#roadmap)
 - [Features](#features)
+  - [RSA algorithm](#rsa-algorithm)
   - [Benchmark](#benchmark)
   - [RSA GMP](#rsa-gmp)
 - [Author](#author)
 - [References](#references)
 
-#  Tutorial
-
-## Installation
-- Install the very last version: ```git clone https://github.com/Bl4omArchie/pubcrypt``` <br>
-- Install the last stable version: https://github.com/Bl4omArchie/Pubcrypt/releases/tag/v1.5.2
-
-Pubcrypt is self-made and do not required any depencies. It should work for python3.6 and more.
-
-## Command line
-
-With the app.py file, call directly your function from the command line:
-``` 
-usage: app.py [-h] [-g G] [-enc ENC] [-dec DEC] [-r R] [-e E] [-n N] [-d D]
-
-Call function from pubcrypt module
-
-options:
-  -h, --help  show this help message and exit
-  -g G        Generate an RSA keypair. Indicate the bits size as an argument
-  -enc ENC    encryption your data
-  -dec DEC    decrypt your data
-  -r R        recover your primes factor. Indicate the public modulus as an argument
-  -e E        Public exponent. By default: e=65537
-  -n N        Public modulus
-  -d D        Private exponent
-``` 
-
-Examples:
-```bash
-python3 app.py -g 2048
-python3 -enc 12 -e 65537 -n 187
-```
-
 # Roadmap
 
 Actual todo-list:
 
+- Improve tests
 - OAEP scheme for encryption and decryption
 - PSS scheme for signature
-- A document with benchmark result that is automatically generated
-- Create the CONTRIBUTING.md and CODE_OF_CONDUCT.md files
-- Make a test file
+- CONTRIBUTING.md
 - More cryptosystem ?
 
+
 # Features 
+
+## RSA algorithm
+
+The first cryptosystem I implemented is RSA. I'm mainly focused on this one because I found it interesting with many side-algorithm to implement (scheme, CRT...).
+You can find the main core of the algo in pubcrypt/cryptosystem/rsa.py and the primality test in pubcrypt/number.primality.py .
+
+Try it yourself:
+
+```py
+from pubcrypt.cryptosystem import rsa
+
+key = rsa.generate(2048)
+print (f"N = {key[0]}, e = {key[1]}, d = {key[2]}")
+
+```
+
 ## Benchmark
 
 This benchmark intend to evaluate the effiency of Pubcrypt's function
