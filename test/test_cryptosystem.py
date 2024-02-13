@@ -21,8 +21,3 @@ def test_key_generation():
     print ("[+] Test complete: 100% sucessful")
     
     print ("--------------------------------------")
-
-
-
-if __name__ == "__main__":
-    test_key_generation()
