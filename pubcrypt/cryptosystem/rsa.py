@@ -1,13 +1,12 @@
 from pubcrypt.number.primality import get_prime_factors
 from pubcrypt.number.util import *
-from random import randrange
 
 
 def generate(nBits, e=65537):
     if nBits < 2048:
         raise ValueError(("Incorrect key length. nBits must be equal or greater than 2048"))
     
-    elif e%2 == 0 or not pow_fast(2, 16) <= e <= pow_fast(2, 256):
+    elif e%2 == 0 or not 2**16 <= e <= 2**256:
         raise ValueError("Incorrect puclic exponent. e must be odd and in the range [2^16, 2^256]")
     pBits = nBits//2
     
@@ -15,16 +14,17 @@ def generate(nBits, e=65537):
     d = invmod(e, lcm(p-1, q-1))
     n = p*q
 
-    if pair_wise_consistency_test(n, e, d) == 0:
-        raise ValueError("Error, please retry. Consistency test failed")
+    #perform a consistency test to insure the validity of the key
+    m = 0x1e29b0d770e07177581a3ff4f882b1d4cbfe4fcec4f1646aec09a0fa9ba8b67fe1690c27
+    if m != fast_exp_mod(m, e*d, n):
+        raise ValueError("[!] Error, please retry. Consistency test failed")
+    
     return n, e, d
 
 
 def primitive_exp(m, exp, n):
-    """ This function represent the encryption/decryption/signature operation """
     if 0 < m < n-1:
-        return pow_fast(m, exp, n)
-
+        return fast_exp_mod(m, exp, n)
     else:
         raise ValueError("Data representative out of range")
 
@@ -34,11 +34,11 @@ def crt_decrypt(ciphertext, n, e, d):
     dp = d % (p - 1)
     dq = d % (q - 1)
     q_inv = invmod(q, p)
-    m1 = pow_fast(ciphertext, dp, p)
-    m2 = pow_fast(ciphertext, dq, q)
+    m1 = fast_exp_mod(ciphertext, dp, p)
+    m2 = fast_exp_mod(ciphertext, dq, q)
 
     h = (q_inv * (m1 - m2)) % p
-    return m2 + h * q   #return plaintext
+    return m2 + h * q
 
 
 def prime_recovery(n, e, d):
@@ -48,15 +48,8 @@ def prime_recovery(n, e, d):
     r = a - m * n
     b = (n - r) // (m + 1) + 1
 
-    if pow_fast(b, 2) <= (n << 2):
+    if b**2 <= (n << 2):
         raise ValueError("Error")
 
-    y = isqrt(pow_fast(b, 2) - (n << 2))
+    y = isqrt(b**2 - (n << 2))
     return (b + y) >> 1, (b - y) >> 1
-
-
-
-def pair_wise_consistency_test(n, e, d):
-    """ Check if the generated keypair can encrypt and decrypt correctly a plaintext m """
-    m = randrange(1, n//2)
-    return m == primitive_exp(m, e*d, n)

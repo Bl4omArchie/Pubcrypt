@@ -8,21 +8,21 @@ def RBG(nBits):
     return int_to_string(getrandbits(nBits), ceil(nBits/8))
 
 
-def invmod(z, a):
-    if not z < a:
-        z, a = a, z
+def invmod  (u, v):
+    if not u < v:
+        u, v = v, u
 
-    i, j = a, z
-    y1, y2 = 1, 0
-
-    while j > 0:
-        q = i // j
-        r = i - (j * q)
-        y = y2 - (y1 * q)
-        i, j = j, r
-        y2, y1 = y1, y
-
-    return y2 % a
+    u3, v3 = u, v
+    u1, v1 = 1, 0
+    while v3 > 0:
+        q = u3 // v3
+        u1, v1 = v1, u1 - v1*q
+        u3, v3 = v3, u3 - v3*q
+    if u3 != 1:
+        raise ValueError("No inverse value can be computed")
+    while u1<0:
+        u1 = u1 + v
+    return u1
 
 
 def gcd(x, y):
@@ -31,16 +31,20 @@ def gcd(x, y):
     if y == 0:
         return x
 
-    x_rightmost = x & -x
-    y_rightmost = y & -y
+    x_z = (x & -x).bit_length()-1
+    y_z = (y & -y).bit_length()-1
+    shift = min(x_z, y_z)
+    y_z >>= y_z
 
-    while x_rightmost != y_rightmost:
-        if x_rightmost > y_rightmost:
-            x_rightmost >>= 1
-        else:
-            y_rightmost >>= 1
+    while x != 0:
+        x >>= x_z
+        diff = y-x
+        x_z = (diff & -diff).bit_length()-1
+        y = min(x, y)
+        x = abs(diff)
 
-    return x_rightmost
+    return y << shift
+
 
 def GCD(x,y):
     """Greatest Common Denominator of :data:`x` and :data:`y`."""
@@ -54,35 +58,25 @@ def lcm(x, y):
     return (x*y) // gcd(x, y)
 
 
-def pow_fast(b, e, m=None):
+def fast_exp_mod(b, e, m):
     result = 1
+    b %= m  
     while e > 0:
         if e & 1:
-            result *= b
-            if m:
-                result %= m
-        b *= b
-        if m:
-            b %= m
+            result = (result * b) % m
+        b = (b * b) % m
         e >>= 1
-
-        if b == 0 and m:
-            b = 1  
-        if m == 0:
-            m = 1 
-    if m:
-        result %= m
-    return result
+    return result % m
 
 
 def isqrt (x):
     q = 1
     while q <= x: 
-        q <<= 2   # Equivalent to q *= 4, but using bitwise shift for better performance
+        q <<= 2                    # Equivalent to q *= 4, but using bitwise shift for better performance
 
     z, r = x, 0
     while q > 1:
-        q >>= 2   # Equivalent to q //= 4, but using bitwise shift for better performance
+        q >>= 2                    # Equivalent to q //= 4, but using bitwise shift for better performance
         t, r = z - r - q, r >> 1   # Equivalent to r //= 2, but using bitwise shift for better performance
         if t >= 0:
             z, r = t, r + q
@@ -96,7 +90,6 @@ def perfect_square(c):
 
     while True:
         x = (pow(x, 2)+c)/(2*x)
-
         if pow(x, 2) < pow(2, m)+c:
             break
 
@@ -122,6 +115,53 @@ def int_to_string(x, xLen, order="big"):
     if order == "little": 
         result = result[::-1]
     return bytes(result)
+
+
+def get_length(num):
+    length = 0
+    while num:
+        length += 1
+        num >>= 1
+    return length
+
+# Using bit wise operators clearly improve performance. See graph in benchmark/graph/
+def karatsuba(x,y):
+    if x < 10 and y < 10:
+        return x*y
+
+    n = max(get_length(x), get_length(y))
+    m = (n + 1) >> 1
+
+    x_H = x >> m
+    x_L = x & ((1 << m)-1)
+
+    y_H = y >> m
+    y_L = y & ((1 << m)-1)
+
+    a = karatsuba(x_H, y_H)
+    d = karatsuba(x_L, y_L)
+    e = karatsuba((x_H + x_L), (y_H + y_L)) - a - d
+
+    return (a << (m << 1)) + ((e << m) + d)
+
+def karatsuba2(x,y):
+    if x < 10 and y < 10:
+        return x*y
+
+    n = max(len(str(x)), len(str(y)))
+    m = ceil(n/2)   #Cast n into a float because n might lie outside the representable range of integers.
+
+    x_H  = floor(x / pow(10, m))
+    x_L = x % pow(10, m)
+
+    y_H = floor(y / pow(10, m))
+    y_L = y % pow(10, m)
+
+    a = karatsuba2(x_H,y_H)
+    d = karatsuba2(x_L,y_L)
+    e = karatsuba2(x_H + x_L, y_H + y_L) - a - d
+
+    return int(a*pow(10, m*2) + e*pow(10, m) + d)
 
 
 def string_to_int(x, order="big"):

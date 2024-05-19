@@ -11,7 +11,7 @@ def get_prime_factor(pBits, e, state):
 
     while candidate == 0:
         while i < (5 * pBits):
-            p = gmpy2.mpz_random(state, 2 ** pBits)
+            p = gmpy2.mpz_random(state, pow(2, pBits))
             if p & 1 == 0:  # if the number is odd, add one
                 p |= 1
 
@@ -25,7 +25,7 @@ def get_prime_factor(pBits, e, state):
     candidate = mpz(0)
     while candidate == 0:
         while i < 5 * pBits:
-            q = gmpy2.mpz_random(state, 2 ** pBits)
+            q = gmpy2.mpz_random(state, pow(2, pBits))
             if q & 1 == 0:
                 q |= 1
 
