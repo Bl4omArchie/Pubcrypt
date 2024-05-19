@@ -1,9 +1,10 @@
-from pubcrypt.parallel.rsa_thread import generate_multi_keypair
-
 from pubcrypt.cryptosystem.rsa_GMP import *
 from pubcrypt.cryptosystem.rsa import *
+
 from pubcrypt.number.primality import *
+from pubcrypt.number.arithmetic import *
 from pubcrypt.number.util import *
+
 from benchmark.plotting import *
 from benchmark.profiler import *
 
@@ -90,4 +91,6 @@ def karatsuba_bench():
 
 
 if __name__ == "__main__":
-    karatsuba_bench()
+    obj = EffiencyProfile(karatsuba)
+    obj.create_profile(65367548677, 76545678876)
+    obj.read_profile()

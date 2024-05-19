@@ -1,4 +1,6 @@
-from pubcrypt.number import util
+from pubcrypt.number.arithmetic import *
+from pubcrypt.number.util import *
+
 from random import randint
 import math
 
@@ -39,13 +41,6 @@ def test_karatsuba():
         raise (f"[!] FAILURE at num_iter = {i}: a = {a}, b = {b}")
     print ("[*] Karatsuba test: 100% passed")
 
-
-def test_perfect_square():
-    pass
-
-def test_lcm():
-    pass
-
 def test_fast_exp_mod():
     try:
         for i in range(num_iter):
@@ -61,12 +56,17 @@ def test_fast_exp_mod():
 def test_isqrt():
     pass
 
+def test_perfect_square():
+    pass
+
+def test_lcm():
+    pass
 
 def run_all_tests():
     test_gcd()
-    #test_invmod()
     test_karatsuba()
-    test_perfect_square()
-    test_lcm()
     test_fast_exp_mod()
-    test_isqrt()
+    #test_invmod()
+    #test_perfect_square()
+    #test_lcm()
+    #test_isqrt()

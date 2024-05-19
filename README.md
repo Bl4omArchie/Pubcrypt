@@ -18,10 +18,8 @@ Table of contents:
 
 Actual todo-list:
 
-- Improve tests
-- OAEP scheme for encryption and decryption
-- PSS scheme for signature
-- CONTRIBUTING.md
+- Cleaning the project
+- Better tests
 - More cryptosystem ?
 
 
@@ -57,15 +55,13 @@ As I started implementing RSA cryptosystem in C with the GMP library, I was curi
 So I implemented another RSA key pairs generator but with the gmpy2 module that you can find in both file: rsa_GMP.py and primality_GMP.py
 A graph for the generation of 100 keys with this algorithm is available in the benchmark/graph folder named "RSA GMP generate function".**
 The outcome is surrounding: my implementation is, from far, slower ! The python GMP implementation burst everything with a maximal generating time of 2.5 seconds. Still we can notice that the average time is 2.3 seconds while Pubcrypt is 2.4 seconds. 
-As a conclusion GMP is more stable than my implementation but not "faster" because the minimal generating time is around 2.2 seconds while pubcrypt go down under the second (0.24s).  
-
 
 
 # Author
 You can contact me and see my work here:
 - Blog: https://bl4omarchie.github.io/archX/
 - Discord server: https://discord.com/invite/D2wGP62
-- Twitter: https://twitter.com/Bl4om_Archie
+
 
 # References
  - [NIST FIPS 186-4: Digital Signature Standard (DSS)](https://nvlpubs.nist.gov/nistpubs/fips/nist.fips.186-4.pdf)
