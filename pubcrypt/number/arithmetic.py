@@ -1,4 +1,5 @@
 from math import floor, log2, ceil
+from pubcrypt.number.util import get_length
 
 def invmod  (u, v):
     if not u < v:

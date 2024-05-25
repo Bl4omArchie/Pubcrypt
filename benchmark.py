@@ -1,9 +1,10 @@
-from pubcrypt.cryptosystem.rsa_GMP import *
 from pubcrypt.cryptosystem.rsa import *
 
 from pubcrypt.number.primality import *
 from pubcrypt.number.arithmetic import *
 from pubcrypt.number.util import *
+
+from pubcrypt.number.lib import PAL, GMP
 
 from benchmark.plotting import *
 from benchmark.profiler import *
@@ -20,11 +21,11 @@ With only two simples class: GraphVisualization and EffiencyProfile, I have acce
 This evaluation is more accurated for huge function that used many external packages.
 """
 
-def generate_bench():
+def generate_bench(library=PAL()):
     n = 10
     key_size = 2048
     obj = GraphVisualization("Function generate")
-    obj.measure_execution_time(n, generate, key_size)
+    obj.measure_execution_time(n, generate, key_size, library)
     obj.plot_data(["green"], ["generate()"], show_stats=True)
 
 def gcd_bench():
@@ -58,12 +59,6 @@ def rng_bench():
     obj.measure_execution_time(n, os.urandom, 2048)
     obj.plot_data(["green", "red", "blue", "purple"], ["getrandbits()", "randint()", "randrange()", "urandom()"], show_stats=False)
 
-def rsa_GMP_bench():
-    n = 100
-    obj = GraphVisualization("RSA GMP generate function")
-    obj.measure_execution_time(n, generate_gmp, 4096)
-    obj.plot_data(["green"], ["generate_gmp()"], show_stats=True)
-
 def decryption_using_crt():
     n = 250
     N, e, d = generate(2048)
@@ -91,6 +86,4 @@ def karatsuba_bench():
 
 
 if __name__ == "__main__":
-    obj = EffiencyProfile(karatsuba)
-    obj.create_profile(65367548677, 76545678876)
-    obj.read_profile()
+    generate_bench()
