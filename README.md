@@ -64,7 +64,7 @@ As a conclusion GMP is more stable than my implementation but not "faster" becau
 # Author
 You can contact me and see my work here:
 - Blog: https://bl4omarchie.github.io/archX/
-- Discord server: https://discord.com/invite/D2wGP62
+- Discord server: https://discord.com/invite/kK3kdFZ
 - Twitter: https://twitter.com/Bl4om_Archie
 
 # References
